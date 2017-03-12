@@ -1,0 +1,13 @@
+﻿body {
+    /*background-image:url('~/images/background1.png');
+    background-size:cover;*/
+    background: #c7cedd;
+    background-color: #D7DDEA;
+    margin:0;
+}
+
+#HeaderBar{
+    height:80px;
+    background: linear-gradient(50deg, #0185d1, #575DA9);
+    box-shadow: 0 5px 5px #888888;
+}
