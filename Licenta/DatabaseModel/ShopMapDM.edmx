@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ShopAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Angajat">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MagazinID" Type="int" Nullable="false" />
+          <Property Name="Nume" Type="nvarchar" MaxLength="50" />
+          <Property Name="Prenume" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CNP" Type="numeric" Precision="13" Scale="0" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Parola" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="DataAngajare" Type="date" Nullable="false" />
+          <Property Name="Salariu" Type="int" Nullable="false" />
+          <Property Name="Functie" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategorieID" Type="int" />
+          <Property Name="Nume" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cod" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descriere" Type="nvarchar" MaxLength="1024" />
+          <Property Name="Imagine" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Furnizor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nume" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adresa" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Oras" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefon" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Livrare">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FurnizorID" Type="int" Nullable="false" />
+          <Property Name="MagazinID" Type="int" Nullable="false" />
+          <Property Name="DataSolicitare" Type="date" Nullable="false" />
+          <Property Name="DataLivrare" Type="date" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descriere" Type="nvarchar" MaxLength="512" />
+          <Property Name="Pret" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Magazin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adresa" Type="nvarchar" MaxLength="128" />
+          <Property Name="Denumire" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Imagine" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Oras" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Produs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategorieID" Type="int" Nullable="false" />
+          <Property Name="MagazinID" Type="int" Nullable="false" />
+          <Property Name="Denumire" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Greutate" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pret" Type="float" />
+          <Property Name="Cantitate" Type="int" Nullable="false" />
+          <Property Name="DataExpirate" Type="date" />
+          <Property Name="Descriere" Type="nvarchar" MaxLength="1024" />
+          <Property Name="Imagine" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Angajat_Magazin">
+          <End Role="Magazin" Type="Self.Magazin" Multiplicity="1" />
+          <End Role="Angajat" Type="Self.Angajat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Angajat">
+              <PropertyRef Name="MagazinID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livrare_Furnizor">
+          <End Role="Furnizor" Type="Self.Furnizor" Multiplicity="1" />
+          <End Role="Livrare" Type="Self.Livrare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Furnizor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Livrare">
+              <PropertyRef Name="FurnizorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livrare_Magazin">
+          <End Role="Magazin" Type="Self.Magazin" Multiplicity="1" />
+          <End Role="Livrare" Type="Self.Livrare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Livrare">
+              <PropertyRef Name="MagazinID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produs_Magazin">
+          <End Role="Magazin" Type="Self.Magazin" Multiplicity="1" />
+          <End Role="Produs" Type="Self.Produs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Produs">
+              <PropertyRef Name="MagazinID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produs_Produs">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+          <End Role="Produs" Type="Self.Produs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Produs">
+              <PropertyRef Name="CategorieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShopAppModelStoreContainer">
+          <EntitySet Name="Angajat" EntityType="Self.Angajat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categorie" EntityType="Self.Categorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Furnizor" EntityType="Self.Furnizor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Livrare" EntityType="Self.Livrare" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Magazin" EntityType="Self.Magazin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produs" EntityType="Self.Produs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Angajat_Magazin" Association="Self.FK_Angajat_Magazin">
+            <End Role="Magazin" EntitySet="Magazin" />
+            <End Role="Angajat" EntitySet="Angajat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livrare_Furnizor" Association="Self.FK_Livrare_Furnizor">
+            <End Role="Furnizor" EntitySet="Furnizor" />
+            <End Role="Livrare" EntitySet="Livrare" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livrare_Magazin" Association="Self.FK_Livrare_Magazin">
+            <End Role="Magazin" EntitySet="Magazin" />
+            <End Role="Livrare" EntitySet="Livrare" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produs_Magazin" Association="Self.FK_Produs_Magazin">
+            <End Role="Magazin" EntitySet="Magazin" />
+            <End Role="Produs" EntitySet="Produs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produs_Produs" Association="Self.FK_Produs_Produs">
+            <End Role="Categorie" EntitySet="Categorie" />
+            <End Role="Produs" EntitySet="Produs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ShopAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Angajat">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MagazinID" Type="Int32" Nullable="false" />
+          <Property Name="Nume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Prenume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CNP" Type="Decimal" Precision="13" Scale="0" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Parola" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DataAngajare" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Salariu" Type="Int32" Nullable="false" />
+          <Property Name="Functie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Magazin" Relationship="Self.FK_Angajat_Magazin" FromRole="Angajat" ToRole="Magazin" />
+        </EntityType>
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategorieID" Type="Int32" />
+          <Property Name="Nume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descriere" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="Imagine" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Produs" Relationship="Self.FK_Produs_Produs" FromRole="Categorie" ToRole="Produs" />
+        </EntityType>
+        <EntityType Name="Furnizor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Oras" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefon" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Livrare" Relationship="Self.FK_Livrare_Furnizor" FromRole="Furnizor" ToRole="Livrare" />
+        </EntityType>
+        <EntityType Name="Livrare">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FurnizorID" Type="Int32" Nullable="false" />
+          <Property Name="MagazinID" Type="Int32" Nullable="false" />
+          <Property Name="DataSolicitare" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DataLivrare" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descriere" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Pret" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Furnizor" Relationship="Self.FK_Livrare_Furnizor" FromRole="Livrare" ToRole="Furnizor" />
+          <NavigationProperty Name="Magazin" Relationship="Self.FK_Livrare_Magazin" FromRole="Livrare" ToRole="Magazin" />
+        </EntityType>
+        <EntityType Name="Magazin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adresa" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Denumire" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Imagine" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Oras" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Angajat" Relationship="Self.FK_Angajat_Magazin" FromRole="Magazin" ToRole="Angajat" />
+          <NavigationProperty Name="Livrare" Relationship="Self.FK_Livrare_Magazin" FromRole="Magazin" ToRole="Livrare" />
+          <NavigationProperty Name="Produs" Relationship="Self.FK_Produs_Magazin" FromRole="Magazin" ToRole="Produs" />
+        </EntityType>
+        <EntityType Name="Produs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategorieID" Type="Int32" Nullable="false" />
+          <Property Name="MagazinID" Type="Int32" Nullable="false" />
+          <Property Name="Denumire" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Greutate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pret" Type="Double" />
+          <Property Name="Cantitate" Type="Int32" Nullable="false" />
+          <Property Name="DataExpirate" Type="DateTime" Precision="0" />
+          <Property Name="Descriere" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="Imagine" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Categorie" Relationship="Self.FK_Produs_Produs" FromRole="Produs" ToRole="Categorie" />
+          <NavigationProperty Name="Magazin" Relationship="Self.FK_Produs_Magazin" FromRole="Produs" ToRole="Magazin" />
+        </EntityType>
+        <Association Name="FK_Angajat_Magazin">
+          <End Role="Magazin" Type="Self.Magazin" Multiplicity="1" />
+          <End Role="Angajat" Type="Self.Angajat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Angajat">
+              <PropertyRef Name="MagazinID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produs_Produs">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+          <End Role="Produs" Type="Self.Produs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Produs">
+              <PropertyRef Name="CategorieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livrare_Furnizor">
+          <End Role="Furnizor" Type="Self.Furnizor" Multiplicity="1" />
+          <End Role="Livrare" Type="Self.Livrare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Furnizor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Livrare">
+              <PropertyRef Name="FurnizorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livrare_Magazin">
+          <End Role="Magazin" Type="Self.Magazin" Multiplicity="1" />
+          <End Role="Livrare" Type="Self.Livrare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Livrare">
+              <PropertyRef Name="MagazinID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produs_Magazin">
+          <End Role="Magazin" Type="Self.Magazin" Multiplicity="1" />
+          <End Role="Produs" Type="Self.Produs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Produs">
+              <PropertyRef Name="MagazinID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShopAppEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Angajat" EntityType="Self.Angajat" />
+          <EntitySet Name="Categorie" EntityType="Self.Categorie" />
+          <EntitySet Name="Furnizor" EntityType="Self.Furnizor" />
+          <EntitySet Name="Livrare" EntityType="Self.Livrare" />
+          <EntitySet Name="Magazin" EntityType="Self.Magazin" />
+          <EntitySet Name="Produs" EntityType="Self.Produs" />
+          <AssociationSet Name="FK_Angajat_Magazin" Association="Self.FK_Angajat_Magazin">
+            <End Role="Magazin" EntitySet="Magazin" />
+            <End Role="Angajat" EntitySet="Angajat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produs_Produs" Association="Self.FK_Produs_Produs">
+            <End Role="Categorie" EntitySet="Categorie" />
+            <End Role="Produs" EntitySet="Produs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livrare_Furnizor" Association="Self.FK_Livrare_Furnizor">
+            <End Role="Furnizor" EntitySet="Furnizor" />
+            <End Role="Livrare" EntitySet="Livrare" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livrare_Magazin" Association="Self.FK_Livrare_Magazin">
+            <End Role="Magazin" EntitySet="Magazin" />
+            <End Role="Livrare" EntitySet="Livrare" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produs_Magazin" Association="Self.FK_Produs_Magazin">
+            <End Role="Magazin" EntitySet="Magazin" />
+            <End Role="Produs" EntitySet="Produs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ShopAppModelStoreContainer" CdmEntityContainer="ShopAppEntities">
+          <EntitySetMapping Name="Angajat">
+            <EntityTypeMapping TypeName="ShopAppModel.Angajat">
+              <MappingFragment StoreEntitySet="Angajat">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MagazinID" ColumnName="MagazinID" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+                <ScalarProperty Name="CNP" ColumnName="CNP" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Parola" ColumnName="Parola" />
+                <ScalarProperty Name="DataAngajare" ColumnName="DataAngajare" />
+                <ScalarProperty Name="Salariu" ColumnName="Salariu" />
+                <ScalarProperty Name="Functie" ColumnName="Functie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorie">
+            <EntityTypeMapping TypeName="ShopAppModel.Categorie">
+              <MappingFragment StoreEntitySet="Categorie">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CategorieID" ColumnName="CategorieID" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Cod" ColumnName="Cod" />
+                <ScalarProperty Name="Descriere" ColumnName="Descriere" />
+                <ScalarProperty Name="Imagine" ColumnName="Imagine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Furnizor">
+            <EntityTypeMapping TypeName="ShopAppModel.Furnizor">
+              <MappingFragment StoreEntitySet="Furnizor">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="Oras" ColumnName="Oras" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Livrare">
+            <EntityTypeMapping TypeName="ShopAppModel.Livrare">
+              <MappingFragment StoreEntitySet="Livrare">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FurnizorID" ColumnName="FurnizorID" />
+                <ScalarProperty Name="MagazinID" ColumnName="MagazinID" />
+                <ScalarProperty Name="DataSolicitare" ColumnName="DataSolicitare" />
+                <ScalarProperty Name="DataLivrare" ColumnName="DataLivrare" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Descriere" ColumnName="Descriere" />
+                <ScalarProperty Name="Pret" ColumnName="Pret" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Magazin">
+            <EntityTypeMapping TypeName="ShopAppModel.Magazin">
+              <MappingFragment StoreEntitySet="Magazin">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Imagine" ColumnName="Imagine" />
+                <ScalarProperty Name="Oras" ColumnName="Oras" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produs">
+            <EntityTypeMapping TypeName="ShopAppModel.Produs">
+              <MappingFragment StoreEntitySet="Produs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CategorieID" ColumnName="CategorieID" />
+                <ScalarProperty Name="MagazinID" ColumnName="MagazinID" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Greutate" ColumnName="Greutate" />
+                <ScalarProperty Name="Pret" ColumnName="Pret" />
+                <ScalarProperty Name="Cantitate" ColumnName="Cantitate" />
+                <ScalarProperty Name="DataExpirate" ColumnName="DataExpirate" />
+                <ScalarProperty Name="Descriere" ColumnName="Descriere" />
+                <ScalarProperty Name="Imagine" ColumnName="Imagine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

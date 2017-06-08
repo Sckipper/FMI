@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="259072dcba334fc5a639352db7838bfe" Name="Diagram1">
+        <EntityTypeShape EntityType="ShopAppModel.Angajat" Width="1.5" PointX="3.625" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopAppModel.Categorie" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopAppModel.Furnizor" Width="1.5" PointX="6.125" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopAppModel.Livrare" Width="1.5" PointX="6.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopAppModel.Magazin" Width="1.5" PointX="3.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopAppModel.Produs" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="ShopAppModel.FK_Angajat_Magazin" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopAppModel.FK_Produs_Produs" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopAppModel.FK_Livrare_Furnizor" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopAppModel.FK_Livrare_Magazin" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopAppModel.FK_Produs_Magazin" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
