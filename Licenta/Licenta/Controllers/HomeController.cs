@@ -12,7 +12,6 @@ using DatabaseModel;
 
 namespace Licenta.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         [AllowAnonymous]

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +12,7 @@ namespace DatabaseModel
     {
         public static Angajat GetEmployee(string email, string password)
         {
-            return new ShopAppEntities().Angajat.Where(el => (el.Email == email) && (el.Parola == password)).Select(el => new Angajat()
+            return new ShopAppEntities().Angajat.AsEnumerable().Where(el => (el.Email == email) && (el.Parola == password)).Select(el => new Angajat()
             {
                 ID = el.ID,
                 MagazinID = el.MagazinID,
@@ -41,6 +43,39 @@ namespace DatabaseModel
                 return user;
             }
             else return null;
+        }
+
+        public static string Encode(string password)
+        {
+            TwofishManaged fish = new TwofishManaged();
+            fish.Mode = CipherMode.ECB;
+            fish.KeySize = 256;
+            System.IO.MemoryStream ms = new MemoryStream();
+            CryptoStream decStream;
+            ICryptoTransform decrypt = fish.CreateDecryptor();
+            CryptoStream cryptostream = new CryptoStream(ms, decrypt, CryptoStreamMode.Write);
+            byte[] data = Encoding.ASCII.GetBytes(password);
+            cryptostream.Write(data, 0, data.Length);
+            cryptostream.Close();
+            //FileStream fs = new FileStream(filename.Replace(".enc", ""), FileMode.Create);
+            //fs.Write(data, 0, data.Length - 1);
+            //fs.Close();
+            return password;
+        }
+
+        public static string EncodePasswordToBase64(string password)
+        {
+            try
+            {
+                byte[] encData_byte = new byte[password.Length];
+                encData_byte = System.Text.Encoding.UTF8.GetBytes(password);
+                string encodedData = Convert.ToBase64String(encData_byte);
+                return encodedData;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error in base64Encode" + ex.Message);
+            }
         }
     }
 }

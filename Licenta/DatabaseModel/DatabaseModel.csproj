@@ -91,6 +91,7 @@
       <DependentUpon>ShopMapDM.edmx</DependentUpon>
     </Compile>
     <Compile Include="SupplierContainer.cs" />
+    <Compile Include="TwoFish.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserManager.cs" />
   </ItemGroup>
