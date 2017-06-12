@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace DatabaseModel
 {
-    public class User
+    public class Category
     {
         public int ID { get; set; }
+        public Nullable<int> CategorieID { get; set; }
         public string Nume { get; set; }
-        public string Prenume { get; set; }
-        public string Email { get; set; }
-        public string Functie { get; set; }
-        public List<string> Magazine { get; set; }
+        public string Cod { get; set; }
+        public string Descriere { get; set; }
+        public string Imagine { get; set; }
     }
 }

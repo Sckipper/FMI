@@ -9,3 +9,77 @@
     background: linear-gradient(50deg, #0185d1, #575DA9);
     box-shadow: 0 5px 6px #888888;
 }
+
+.containerWrapper{
+   background-color: #eff1f4;
+   border: 1px #ccc;
+   margin-top: 30px;
+   padding: 5px 15px;
+}
+
+#userPanel{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: black;
+    border-radius: 0 0 0 15px;
+    color: white;
+    padding: 8px 18px;
+    display: none;
+}
+
+#logoutButton{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    float: right;
+    margin-left:10px;
+    content: url(Images/LogOut.png);
+}
+
+#markets{
+    margin-top: 3px;
+    border: none;
+    background-color: black;
+    color: white;
+    outline: none;
+}
+
+#logoMenu{
+    width: 70px;
+    height: 70px;
+    margin-left: 20px;
+    margin-top: 5px;
+    cursor: pointer;
+    display: none;
+    content: url(Images/Logo1.png);
+}
+
+#menu{
+    top: 80px;
+    background: rgba(0, 0, 0, 0.9);
+    max-height: 75%;
+    border-radius: 5px;
+    color: #eff1f7;
+    display: none;
+    left: 17px;
+    overflow: hidden;
+    padding: 20px;
+    position: fixed;
+    width: auto;
+    z-index: 7777;
+}
+
+#menuContent{
+    display:grid;
+}
+
+#menuContent a{
+    cursor:pointer;
+    margin:2px;
+
+}
+
+#menuContent a:hover {
+    color: white;
+}

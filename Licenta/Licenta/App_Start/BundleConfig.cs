@@ -9,10 +9,19 @@ namespace Licenta
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/3rdParty/jquery-1.10.2.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                        "~/Scripts/3rdParty/jquery-ui.1.12.1.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/Logged").Include(
+                        "~/Scripts/Logged.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/Categories").Include(
+                        "~/Scripts/Categories.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -33,6 +42,13 @@ namespace Licenta
                       "~/Content/Login.css"
                       ));
 
+            bundles.Add(new StyleBundle("~/Content/Home").Include(
+                      "~/Content/Home.css"
+                      ));
+
+            bundles.Add(new StyleBundle("~/Content/Categories").Include(
+                      "~/Content/Categories.css"
+                      ));
         }
     }
 }

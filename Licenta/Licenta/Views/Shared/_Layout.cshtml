@@ -5,15 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-</head>
-<body>
-    <div id="HeaderBar">
-        
-    </div>
-    @RenderBody()
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+</head>
+<body>
+    <div id="HeaderBar">
+        <div id="userPanel">
+            @if (SessionAccessor.LoggedUser != null)
+            {
+                @(SessionAccessor.LoggedUser.Nume) }
+            ||
+            @if (SessionAccessor.LoggedUser != null)
+            {
+                @(SessionAccessor.LoggedUser.Functie) }
+            ||
+            @if (SessionAccessor.LoggedUser != null)
+            {
+                @Html.DropDownList("markets", new SelectList(SessionAccessor.LoggedUser.Magazine));
+            }
+            <img id="logoutButton" onclick="location.href='@Url.Action("Logout", "Home")'" />
+        </div>
+        
+        <img id="logoMenu" />    
+        <div id="menu">
+            <div id="menuContent">
+                <a onclick="location.href='@Url.Action("Index", "Categories")'" >Categorii</a>
+                <a>Produse</a>
+                <a>Livrari</a>
+                <a>Furnizori</a>
+                <a>Magazine</a>
+                <a>Angajati</a>
+            </div>
+        </div> 
+    </div>
+    @RenderBody()  
 </body>
 </html>

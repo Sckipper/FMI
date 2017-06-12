@@ -27,6 +27,18 @@ namespace DatabaseModel
             }).FirstOrDefault();
         }
 
+        public static List<string> GetMarkets(int id)
+        {
+            using (var db = new ShopAppEntities())
+            {
+                List<string> list = (from m in db.Magazin
+                                     join a in db.Angajat on m.ID equals a.MagazinID
+                                     where a.ID == id
+                                     select a.Magazin.Denumire).ToList();
+                return list;
+            }
+        }
+
         public static User AuthentificateUser(string email, string password, bool remember)
         {
             Angajat employee = GetEmployee(email, password);
@@ -39,7 +51,7 @@ namespace DatabaseModel
                 user.Prenume = employee.Prenume;
                 user.Email = employee.Email;
                 user.Functie = employee.Functie;
-
+                user.Magazine = GetMarkets(user.ID);
                 return user;
             }
             else return null;

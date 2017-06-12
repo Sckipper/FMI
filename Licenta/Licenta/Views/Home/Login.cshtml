@@ -70,13 +70,15 @@
             </div>
         </div>
     </div>
-
+    @Scripts.Render("~/bundles/jqueryui")
     @if (Model != null)
     {
         if (ViewBag.IncorrectUser)
         {
             <script type="text/javascript">
-                $("#LoginBox").effect("shake");
+                $(document).ready(function () {
+                    $("#LoginBox").effect("shake");
+                })   
             </script>
         }
     }

@@ -8,9 +8,9 @@ namespace DatabaseModel
 {
     public class CategoryContainer
     {
-        public List<Categorie> GetCategories()
+        public List<Category> GetCategories()
         {
-            return new ShopAppEntities().Categorie.Select(el => new Categorie()
+            return new ShopAppEntities().Categorie.Select(el => new Category()
             {
                 ID = el.ID,
                 CategorieID = el.CategorieID,
@@ -45,14 +45,11 @@ namespace DatabaseModel
             }
         }
 
-        public static void DeleteCategory(Categorie category)
+        public static void DeleteCategory(int id)
         {
-            if (category == null)
-                throw new ArgumentNullException("category");
-
             using (var db = new ShopAppEntities())
             {
-                Categorie categ = db.Categorie.FirstOrDefault(el => el.ID == category.ID);
+                Categorie categ = db.Categorie.FirstOrDefault(el => el.ID == id);
                 if (categ != null)
                 {
                     db.Categorie.Remove(categ);

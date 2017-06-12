@@ -57,10 +57,15 @@
     <Compile Include="Categorie.cs">
       <DependentUpon>ShopMapDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Category.cs" />
     <Compile Include="CategoryContainer.cs" />
+    <Compile Include="Delivery.cs" />
     <Compile Include="DeliveryContainer.cs" />
+    <Compile Include="Employee.cs" />
     <Compile Include="EmployeeContainer.cs" />
+    <Compile Include="Market.cs" />
     <Compile Include="MarketContainer.cs" />
+    <Compile Include="Product.cs" />
     <Compile Include="ProductsContainer.cs" />
     <Compile Include="Furnizor.cs">
       <DependentUpon>ShopMapDM.tt</DependentUpon>
@@ -90,6 +95,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ShopMapDM.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Supplier.cs" />
     <Compile Include="SupplierContainer.cs" />
     <Compile Include="TwoFish.cs" />
     <Compile Include="User.cs" />

@@ -12,11 +12,14 @@ using DatabaseModel;
 
 namespace Licenta.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         [AllowAnonymous]
         public ActionResult Login()
         {
+            if (SessionAccessor.LoggedUser != null)
+                return RedirectToAction("Home");
             return View();
         }
 
@@ -32,18 +35,42 @@ namespace Licenta.Controllers
 
                 if (SessionAccessor.LoggedUser != null)
                 {
-                    FormsAuthentication.SetAuthCookie(SessionAccessor.LoggedUser.Nume, true);
+                    // Check the remember option for login
+
+                    if (logmodel.RememberMe == true)
+                    {
+                        HttpCookie cookie = new HttpCookie("email");
+                        cookie.Value = logmodel.Email.Trim();
+                        cookie.Expires = DateTime.Now.AddHours(24);
+                        Response.AppendCookie(cookie);
+                    }
+                    else
+                    {
+                        Response.Cookies.Remove("email");
+                        Response.Cookies["email"].Expires = DateTime.Now;
+                    }
+
+                    FormsAuthentication.SetAuthCookie(SessionAccessor.LoggedUser.Nume, logmodel.RememberMe);
                     ViewBag.IncorrectUser = false;
+                                      
                     return RedirectToAction("Home");
                 }
             }
             return View(logmodel);
         }
-
+      
         public ActionResult Home()
         {
-
+            if(SessionAccessor.LoggedUser == null)
+                return RedirectToAction("Login", "Home");
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Clear();
+            return RedirectToAction("Home/Login");
         }
     }
 }
