@@ -28,7 +28,7 @@ namespace Licenta.Controllers
         // POST: Categoriees/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Categorie category)
+        public ActionResult Create(Category category)
         {
             if (ModelState.IsValid)
             {
@@ -41,7 +41,7 @@ namespace Licenta.Controllers
         // POST: Categoriees/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Categorie category)
+        public ActionResult Edit(Category category)
         {
             if (ModelState.IsValid)
             {
@@ -52,17 +52,17 @@ namespace Licenta.Controllers
             return View(category);
         }
 
-        // GET: Categoriees/Edit/5
-        //public ActionResult Edit(int? id, string name)
-        //{
-        //    if (id == null)
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    var category = new Categorie();
-        //    category.Id = (int)id;
-        //    category.Name = name;
 
-        //    return View(category);
-        //}
+        // GET: Categoriees/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var category = new Category();
+            category = CategoryContainer.getCategoryById((int)id);
+
+            return View(category);
+        }
 
         // GET: Categoriees/Delete/5
         public ActionResult Delete(int id)

@@ -1,0 +1,74 @@
+﻿@model DatabaseModel.Category
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+@Styles.Render("~/Content/Categories")
+@Scripts.Render("~/bundles/Logged")
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="container pagination-centered">
+        <div class="containerWrapper col-md-6 col-md-offset-3">
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+                <br />
+                <div class="form-group">
+                    <div class="form-group">
+                        <strong class="control-label col-md-3 ">Categorie Superioara:</strong>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => Model.CategorieID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => Model.CategorieID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <strong class="control-label col-md-3 ">Denumire:</strong>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => Model.Nume, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => Model.Nume, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <strong class="control-label col-md-3 ">Cod:</strong>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => Model.Cod, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => Model.Cod, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <strong class="control-label col-md-3 ">Descriere:</strong>
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => Model.Descriere, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
+                            @Html.ValidationMessageFor(model => Model.Descriere, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <strong class="control-label col-md-3 ">Imagine:</strong>
+                        <div class="col-md-8">
+                            @using (Html.BeginForm("FileUpload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {   <input type="file" name="file" id="file" class="col-md-8" />    }
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10 ">
+                        <input type="submit" value="Modifica" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

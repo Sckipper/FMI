@@ -21,7 +21,25 @@ namespace DatabaseModel
             }).ToList();
         }
 
-        public static void SaveCategory(Categorie category)
+        public static Category getCategoryById(int id)
+        {
+            using (var db = new ShopAppEntities())
+            {
+                Categorie cat = db.Categorie.FirstOrDefault(el => el.ID == id);
+                return new Category()
+                {
+                    ID = cat.ID,
+                    CategorieID = cat.CategorieID,
+                    Nume = cat.Nume,
+                    Cod = cat.Cod,
+                    Descriere = cat.Descriere,
+                    Imagine = cat.Imagine
+                };
+            }
+                
+        }
+
+        public static void SaveCategory(Category category)
         {
             if (category == null)
                 throw new ArgumentNullException("Category");

@@ -31,7 +31,7 @@
     outline:none;
 }
 
-#edit{
+.edit{
     background: url('Images/edit.png');
     background-size:contain;
     width:21px;
@@ -43,7 +43,7 @@
     outline:none;
 }
 
-#delete{
+.delete{
     background: url('Images/delete.png');
     background-size:contain;
     width:21px;
@@ -91,4 +91,25 @@ textarea{
 
 #id{
     display:none;
+}
+
+#deleteDialog{
+  background-color:rgba(0,0,0,0.5);
+  width:      100%;
+  height:     100%; 
+  z-index:    10;
+  top:        0; 
+  left:       0; 
+  position:   fixed; 
+  display: none;
+}
+
+#innerDialog{
+    padding: 15px;
+    border-radius: 10px;
+    z-index: 12;
+    top: 45%;
+    left: 35%;
+    margin: auto;
+    position: absolute;
 }

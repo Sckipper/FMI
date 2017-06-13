@@ -27,11 +27,12 @@
 
 <div class="container pagination-centered">
     <div class="col-md-12">
-        <div class="containerWrapper dataTables_wrapper form-inline dt-bootstrap">
+        <div class="dataTables_wrapper form-inline dt-bootstrap containerWrapper">
             <div class="table-responsive">
                 <table id="datatable" class="table dataTable">
                     <thead>
                         <tr>
+                            <th id="id"></th>
                             <th class="col-xs-2">Categ Superioara</th>
                             <th class="col-xs-2">Categorie</th>
                             <th class="col-xs-1">Cod raft</th>
@@ -54,7 +55,7 @@
                                 <td>@item.Imagine</td>
                                 <td>
                                     <button class="edit" onclick="location.href='@Url.Action("Edit", "Categories", new { id = item.ID})'"></button>
-                                    <button class="delete" onclick="location.href='@Url.Action("Delete", "Categories", new { id = item.ID})'"></button>
+                                    <button class="delete"></button>
                                 </td>
                             </tr>
                         }
@@ -65,10 +66,12 @@
     </div>
 </div>
 
-<div id="deleteDialog" class="containerWrapper">
-    <h4 id="deleteMesage"></h4>  
-    <button id="deleteDialogFalse" class="btn btn-primary">Nu</button>
-    <button id="deleteDialogTrue" class="btn btn-primary">Da</button>
+<div id="deleteDialog">
+    <div id="innerDialog" class="containerWrapper">
+        <h4 id="deleteMesage"></h4>
+        <button id="deleteDialogFalse" class="col-xs-2 col-xs-offset-2 btn btn-primary">Nu</button>
+        <button id="deleteDialogTrue" class="col-xs-2 col-xs-offset-4 btn btn-primary">Da</button>
+    </div>
 </div>
 
 @Scripts.Render("~/Scripts/Categories.js")

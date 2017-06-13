@@ -7,6 +7,7 @@
         deleteMesage: $("#deleteMesage"),
         deleteDialogTrue: $("#deleteDialogTrue"),
         deleteDialogFalse: $("#deleteDialogFalse"),
+        innerDialog: $("#innerDialog")
     }
 
     elements.addedrow.mouseover(function () {
@@ -21,19 +22,20 @@
 
     $(".delete").click(function () {
         elements.deleteDialog.show();
-        var categoryName = $(this).parent().find("#nume").val();
+        var id = $(this).parent().parent().find("#id").text();
+        elements.innerDialog.data( "foo", id );
+        var categoryName = $(this).parent().parent().find("#nume").text();
         elements.deleteMesage.text("Esti sigur ca vrei sa stergi categoria \"" + categoryName + "\" ?");
     });
 
     elements.deleteDialogFalse.click(function () {
         elements.deleteDialog.hide();
-    })
+    });
 
     elements.deleteDialogTrue.click(function () {
-        var id = $(this).parent().find("#id").val();
-        window.location.href = "/Categories/Delete/" + id;
+        window.location.href = "Delete/" + elements.innerDialog.data("foo");
         elements.deleteDialog.hide();
-    })
+    });
 }
 
 var cat = new Categories();
