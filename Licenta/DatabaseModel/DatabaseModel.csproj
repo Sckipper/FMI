@@ -32,11 +32,9 @@
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -52,10 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Angajat.cs">
-      <DependentUpon>ShopMapDM.tt</DependentUpon>
+      <DependentUpon>ShopAppDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Categorie.cs">
-      <DependentUpon>ShopMapDM.tt</DependentUpon>
+      <DependentUpon>ShopAppDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Category.cs" />
     <Compile Include="CategoryContainer.cs" />
@@ -63,37 +61,37 @@
     <Compile Include="DeliveryContainer.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeContainer.cs" />
+    <Compile Include="Furnizor.cs">
+      <DependentUpon>ShopAppDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Livrare.cs">
+      <DependentUpon>ShopAppDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Magazin.cs">
+      <DependentUpon>ShopAppDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Market.cs" />
     <Compile Include="MarketContainer.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductsContainer.cs" />
-    <Compile Include="Furnizor.cs">
-      <DependentUpon>ShopMapDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Livrare.cs">
-      <DependentUpon>ShopMapDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Magazin.cs">
-      <DependentUpon>ShopMapDM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Produs.cs">
-      <DependentUpon>ShopMapDM.tt</DependentUpon>
+      <DependentUpon>ShopAppDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShopMapDM.Context.cs">
+    <Compile Include="ShopAppDM.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ShopMapDM.Context.tt</DependentUpon>
+      <DependentUpon>ShopAppDM.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShopMapDM.cs">
+    <Compile Include="ShopAppDM.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ShopMapDM.tt</DependentUpon>
+      <DependentUpon>ShopAppDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShopMapDM.Designer.cs">
+    <Compile Include="ShopAppDM.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ShopMapDM.edmx</DependentUpon>
+      <DependentUpon>ShopAppDM.edmx</DependentUpon>
     </Compile>
     <Compile Include="Supplier.cs" />
     <Compile Include="SupplierContainer.cs" />
@@ -102,32 +100,32 @@
     <Compile Include="UserManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="ShopMapDM.edmx">
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="ShopAppDM.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ShopMapDM.Designer.cs</LastGenOutput>
+      <LastGenOutput>ShopAppDM.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
     <None Include="packages.config" />
-    <None Include="ShopMapDM.edmx.diagram">
-      <DependentUpon>ShopMapDM.edmx</DependentUpon>
+    <None Include="ShopAppDM.edmx.diagram">
+      <DependentUpon>ShopAppDM.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ShopMapDM.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ShopMapDM.edmx</DependentUpon>
-      <LastGenOutput>ShopMapDM.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ShopMapDM.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ShopMapDM.edmx</DependentUpon>
-      <LastGenOutput>ShopMapDM.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="ShopAppDM.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ShopAppDM.Context.cs</LastGenOutput>
+      <DependentUpon>ShopAppDM.edmx</DependentUpon>
+    </Content>
+    <Content Include="ShopAppDM.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ShopAppDM.edmx</DependentUpon>
+      <LastGenOutput>ShopAppDM.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

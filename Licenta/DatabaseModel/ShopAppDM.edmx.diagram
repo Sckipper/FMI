@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="259072dcba334fc5a639352db7838bfe" Name="Diagram1">
-        <EntityTypeShape EntityType="ShopAppModel.Angajat" Width="1.5" PointX="3.625" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopAppModel.Categorie" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopAppModel.Furnizor" Width="1.5" PointX="6.125" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopAppModel.Livrare" Width="1.5" PointX="6.125" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopAppModel.Magazin" Width="1.5" PointX="3.625" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopAppModel.Produs" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
+      <Diagram DiagramId="ac05b043413041ba8580b687406121da" Name="Diagram1">
+        <EntityTypeShape EntityType="ShopAppModel.Angajat" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopAppModel.Categorie" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopAppModel.Furnizor" Width="1.5" PointX="3.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopAppModel.Livrare" Width="1.5" PointX="6" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopAppModel.Magazin" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopAppModel.Produs" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="ShopAppModel.FK_Angajat_Magazin" ManuallyRouted="false" />
         <AssociationConnector Association="ShopAppModel.FK_Produs_Produs" ManuallyRouted="false" />
         <AssociationConnector Association="ShopAppModel.FK_Livrare_Furnizor" ManuallyRouted="false" />

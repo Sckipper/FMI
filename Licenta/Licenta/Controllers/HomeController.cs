@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Oracle.DataAccess;
-using Oracle.ManagedDataAccess.Client;
 using System.Data;
 using Licenta.Models;
 using System.Web.Security;
