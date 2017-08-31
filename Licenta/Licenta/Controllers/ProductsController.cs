@@ -9,51 +9,51 @@ using System.Net;
 namespace Licenta.Controllers
 {
     [Authorize]
-    public class CategoriesController : Controller
+    public class ProductsController : Controller
     {
-        // GET: Categories
+        // GET: Products
         public ActionResult Index()
         {
-            var categories = new CategoryContainer().GetCategories();//.OrderBy(el => el.Nume);
+            var products = new ProductsContainer().GetProducts();//.OrderBy(el => el.Nume);
 
-            return View(categories);
+            return View(products);
         }
 
-        // GET: Categoriees/Create
+        // GET: Products/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Categoriees/Create
+        // POST: Products/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Category category)
+        public ActionResult Create(Product product)
         {
             if (ModelState.IsValid)
             {
-                CategoryContainer.SaveCategory(category);
+                ProductsContainer.SaveProduct(product);
                 return RedirectToAction("Index");
             }
-            return View(category);
+            return View(product);
         }
 
-        // POST: Categoriees/Edit
+        // POST: Products/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Category category)
+        public ActionResult Edit(Product product)
         {
             if (ModelState.IsValid)
             {
-                CategoryContainer.SaveCategory(category);
+                ProductsContainer.SaveProduct(product);
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            return View(product);
         }
 
 
-        // GET: Categoriees/Edit/5
+        // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -64,7 +64,7 @@ namespace Licenta.Controllers
             return View(category);
         }
 
-        // GET: Categoriees/Delete/5
+        // GET: Products/Delete/5
         public ActionResult Delete(int id)
         {
             if (id < 1)

@@ -8,9 +8,9 @@ namespace DatabaseModel
 {
     public class ProductsContainer
     {
-        public List<Produs> GetProducts()
+        public List<Product> GetProducts()
         {
-            return new ShopAppEntities().Produs.Select(el => new Produs()
+            return new ShopAppEntities().Produs.Select(el => new Product()
             {
                 ID = el.ID,
                 CategorieID = el.CategorieID,
@@ -24,7 +24,7 @@ namespace DatabaseModel
             }).ToList();
         }
 
-        public static void SaveProduct(Produs product)
+        public static void SaveProduct(Product product)
         {
             if (product == null)
                 throw new ArgumentNullException("Product");
@@ -51,7 +51,7 @@ namespace DatabaseModel
             }
         }
 
-        public static void DeleteProduct(Produs product)
+        public static void DeleteProduct(Product product)
         {
             if (product == null)
                 throw new ArgumentNullException("product");

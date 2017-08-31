@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Produse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
+<script>
+    $(document).ready(function (){
+        $('#datatable').dataTable( {
+            "columnDefs": [ {
+                "targets": 'no-sort',
+                "orderable": false,
+            } ]
+        } );
+    });
+</script>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
+@Styles.Render("~/Content/Products")
+@Scripts.Render("~/bundles/Logged")
+
+<div class="container pagination-centered">
+    <div class="col-md-12">
+        <div class="dataTables_wrapper form-inline dt-bootstrap containerWrapper">
+            <div class="table-responsive">
+                <table id="datatable" class="table dataTable">
+                    <thead>
+                        <tr>
+                            <th id="id"></th>
+                            <th class="col-xs-1">Categorie</th>
+                            <th class="col-xs-1">Magazin</th>
+                            <th class="col-xs-1">Produs</th>
+                            <th class="col-xs-1">Greutate</th>
+                            <th class="col-xs-1">Pret</th>
+                            <th class="col-xs-1">Cantitate</th>
+                            <th class="col-xs-1">Data Expirare</th>
+                            <th class="col-xs-1">Descriere</th>
+                            <th class="col-xs-1">Imagine</th>
+                            <th class="col-xs-1 no-sort">
+                                <button id="add" onclick="location.href='@Url.Action("Create", "Products")'" />
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="table">
+                        @foreach (var item in Model)
+                        {
+                            <tr class="addedrow">
+                                <td id="id">@item.ID</td>
+                                <td>@item.CategorieID</td>
+                                <td id="nume">@item.MagazinID</td>
+                                <td>@item.Denumire</td>
+                                <td>@item.Greutate</td>
+                                <td>@item.Pret</td>
+                                <td>@item.Cantitate</td>
+                                <td>@item.DataExpirate</td>
+                                <td>@item.Descriere</td>
+                                <td>@item.Imagine</td>
+                                <td>
+                                    <button class="edit" onclick="location.href='@Url.Action("Edit", "Products", new { id = item.ID})'"></button>
+                                    <button class="delete"></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="deleteDialog">
+    <div id="innerDialog" class="containerWrapper">
+        <h4 id="deleteMesage"></h4>
+        <button id="deleteDialogFalse" class="col-xs-2 col-xs-offset-2 btn btn-primary">Nu</button>
+        <button id="deleteDialogTrue" class="col-xs-2 col-xs-offset-4 btn btn-primary">Da</button>
+    </div>
+</div>
+
+@Scripts.Render("~/Scripts/Products.js")
