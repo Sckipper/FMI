@@ -202,3 +202,7 @@ textarea {
     margin: auto;
     position: absolute;
 }
+
+.dataTables_wrapper{
+    margin-bottom: 20px;
+}
