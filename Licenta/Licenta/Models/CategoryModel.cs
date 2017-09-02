@@ -8,6 +8,6 @@ namespace Licenta.Models
 {
     public class CategoryModel
     {
-        public Categorie Category { get; set; }
+        public Category Category { get; set; }
     }
 }

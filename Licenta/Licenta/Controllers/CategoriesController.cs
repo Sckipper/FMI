@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using DatabaseModel;
 using System.Net;
+using Licenta.Models;
 
 namespace Licenta.Controllers
 {
@@ -35,7 +36,9 @@ namespace Licenta.Controllers
                 CategoryContainer.SaveCategory(category);
                 return RedirectToAction("Index");
             }
-            return View(category);
+            var model = new CategoryModel();
+            model.Category = category;
+            return View(model);
         }
 
         // POST: Categoriees/Edit

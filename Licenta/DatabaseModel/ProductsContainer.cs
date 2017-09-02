@@ -24,6 +24,27 @@ namespace DatabaseModel
             }).ToList();
         }
 
+        public static Product getProductById(int id)
+        {
+            using (var db = new ShopAppEntities())
+            {
+                Produs prod = db.Produs.FirstOrDefault(el => el.ID == id);
+                return new Product()
+                {
+                    ID = prod.ID,
+                    CategorieID = prod.CategorieID,
+                    MagazinID = prod.MagazinID,
+                    Denumire = prod.Denumire,
+                    Greutate = prod.Greutate,
+                    Pret = prod.Pret,
+                    Cantitate = prod.Cantitate,
+                    DataExpirate = prod.DataExpirate,
+                    Descriere = prod.Descriere,
+                };
+            }
+
+        }
+
         public static void SaveProduct(Product product)
         {
             if (product == null)

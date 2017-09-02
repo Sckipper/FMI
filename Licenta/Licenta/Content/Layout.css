@@ -84,9 +84,6 @@
     color: white;
 }
 
-
-
-
 #insert {
     display: none;
     background: #EEEEEE !important;
@@ -123,8 +120,8 @@
 .edit {
     background: url('Images/edit.png');
     background-size: contain;
-    width: 21px;
-    height: 21px;
+    width: 20px;
+    height: 20px;
     border: none;
     margin-left: 10px;
     float: right;
@@ -135,8 +132,8 @@
 .delete {
     background: url('Images/delete.png');
     background-size: contain;
-    width: 21px;
-    height: 21px;
+    width: 20px;
+    height: 20px;
     border: none;
     float: right;
     display: none;
@@ -198,11 +195,19 @@ textarea {
     border-radius: 10px;
     z-index: 12;
     top: 45%;
-    left: 35%;
+    left: 30%;
     margin: auto;
     position: absolute;
 }
 
 .dataTables_wrapper{
     margin-bottom: 20px;
+}
+
+.containerWrapper {
+    margin-bottom: 20px;
+}
+
+.userBar {
+    color: #989898;
 }

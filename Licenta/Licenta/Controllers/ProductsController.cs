@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using DatabaseModel;
 using System.Net;
+using Licenta.Models;
 
 namespace Licenta.Controllers
 {
@@ -35,6 +36,8 @@ namespace Licenta.Controllers
                 ProductsContainer.SaveProduct(product);
                 return RedirectToAction("Index");
             }
+            var model = new ProductModel();
+            model.Product = product;
             return View(product);
         }
 
@@ -58,10 +61,10 @@ namespace Licenta.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var category = new Category();
-            category = CategoryContainer.getCategoryById((int)id);
+            var product = new Product();
+            product = ProductsContainer.getProductById((int)id);
 
-            return View(category);
+            return View(product);
         }
 
         // GET: Products/Delete/5

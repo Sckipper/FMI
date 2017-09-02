@@ -43,23 +43,27 @@ namespace DatabaseModel
         {
             if (category == null)
                 throw new ArgumentNullException("Category");
-
-            using (var db = new ShopAppEntities())
-            {
-                Categorie categ = db.Categorie.FirstOrDefault(el => el.ID == category.ID);
-                if (categ == null)
+            try{
+                using (var db = new ShopAppEntities())
                 {
-                    categ = new Categorie();
-                    db.Categorie.Add(categ);
+                    Categorie categ = db.Categorie.FirstOrDefault(el => el.ID == category.ID);
+                    if (categ == null)
+                    {
+                        categ = new Categorie();
+                        db.Categorie.Add(categ);
+                    }
+
+                    categ.CategorieID = category.CategorieID;
+                    categ.Nume = category.Nume;
+                    categ.Cod = category.Cod;
+                    categ.Descriere = category.Descriere;
+                    categ.Imagine = category.Imagine;
+
+                    db.SaveChanges();
                 }
+            }
+            catch(Exception ex){
 
-                categ.CategorieID = category.CategorieID;
-                categ.Nume = category.Nume;
-                categ.Cod = category.Cod;
-                categ.Descriere = category.Descriere;
-                categ.Imagine = category.Imagine;
-
-                db.SaveChanges();
             }
         }
 

@@ -15,11 +15,11 @@
             @if (SessionAccessor.LoggedUser != null)
             {
                 @(SessionAccessor.LoggedUser.Nume) }
-            ||
+            <span class="userBar">//</span>
             @if (SessionAccessor.LoggedUser != null)
             {
                 @(SessionAccessor.LoggedUser.Functie) }
-            ||
+            <span class="userBar">//</span>
             @if (SessionAccessor.LoggedUser != null)
             {
                 @Html.DropDownList("markets", new SelectList(SessionAccessor.LoggedUser.Magazine));
@@ -42,3 +42,5 @@
     @RenderBody()  
 </body>
 </html>
+
+@Scripts.Render("~/bundles/Layout")

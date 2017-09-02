@@ -22,7 +22,6 @@
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
-@Styles.Render("~/Content/Products")
 @Scripts.Render("~/bundles/Logged")
 
 <div class="container pagination-centered">
@@ -33,15 +32,15 @@
                     <thead>
                         <tr>
                             <th id="id"></th>
-                            <th class="col-xs-1">Categorie</th>
-                            <th class="col-xs-1">Magazin</th>
-                            <th class="col-xs-1">Produs</th>
-                            <th class="col-xs-1">Greutate</th>
-                            <th class="col-xs-1">Pret</th>
-                            <th class="col-xs-1">Cantitate</th>
-                            <th class="col-xs-1">Data Expirare</th>
-                            <th class="col-xs-1">Descriere</th>
-                            <th class="col-xs-1">Imagine</th>
+                            <th>Categorie</th>
+                            <th>Magazin</th>
+                            <th>Produs</th>
+                            <th>Greutate</th>
+                            <th>Pret</th>
+                            <th>Cantitate</th>
+                            <th>Data Expirare</th>
+                            <th>Descriere</th>
+                            <th>Imagine</th>
                             <th class="col-xs-1 no-sort">
                                 <button id="add" onclick="location.href='@Url.Action("Create", "Products")'" />
                             </th>
@@ -53,8 +52,8 @@
                             <tr class="addedrow">
                                 <td id="id">@item.ID</td>
                                 <td>@item.CategorieID</td>
-                                <td id="nume">@item.MagazinID</td>
-                                <td>@item.Denumire</td>
+                                <td>@item.MagazinID</td>
+                                <td id="nume">@item.Denumire</td>
                                 <td>@item.Greutate</td>
                                 <td>@item.Pret</td>
                                 <td>@item.Cantitate</td>
@@ -81,5 +80,3 @@
         <button id="deleteDialogTrue" class="col-xs-2 col-xs-offset-4 btn btn-primary">Da</button>
     </div>
 </div>
-
-@Scripts.Render("~/Scripts/Products.js")
