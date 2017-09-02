@@ -15,7 +15,10 @@ namespace Licenta.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            var categories = new CategoryContainer().GetCategories();//.OrderBy(el => el.Nume);
+            var categories = CategoryContainer.GetCategories();
+            foreach(var categ in categories)
+                if(categ.CategorieID != null)
+                    categ.CategoryName = categories.FirstOrDefault(x => x.ID == categ.CategorieID).Nume;
 
             return View(categories);
         }
@@ -23,7 +26,9 @@ namespace Licenta.Controllers
         // GET: Categoriees/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new CategoryModel();
+            model.Categories = CategoryContainer.GetCategories();
+            return View(model);
         }
 
         // POST: Categoriees/Create

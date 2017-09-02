@@ -65,7 +65,7 @@
     left: 17px;
     overflow: hidden;
     padding: 20px;
-    position: fixed;
+    position: absolute;
     width: auto;
     z-index: 7777;
 }
@@ -210,4 +210,29 @@ textarea {
 
 .userBar {
     color: #989898;
+}
+
+.endButtons{
+    width: 50px;
+}
+
+.img {
+    max-width: 20px;
+    max-height: 20px;
+}
+
+    .image img {
+        -webkit-transition: all 0.8s ease; /* Safari and Chrome */
+        -moz-transition: all 0.8s ease; /* Firefox */
+        -ms-transition: all 0.8s ease; /* IE 9 */
+        -o-transition: all 0.8s ease; /* Opera */
+        transition: all 0.8s ease;
+    }
+
+.image:hover img {
+    -webkit-transform: scale(10); /* Safari and Chrome */
+    -moz-transform: scale(10); /* Firefox */
+    -ms-transform: scale(10); /* IE 9 */
+    -o-transform: scale(10); /* Opera */
+    transform: scale(10);
 }

@@ -1,13 +1,26 @@
 ﻿var Layout = function () {
-    var deleteMesage = "Esti sigur ca vrei sa stergi"; 
+    var deleteMesage = null; 
 
     var getDeleteMessage = function () {
+        deleteMesage = "Esti sigur ca vrei sa stergi ";
         switch ($(document).find("title").text()){
             case "Categorii":
                 deleteMesage += "categoria";
                 break;
             case "Produse": 
                 deleteMesage += "produsul";
+                break;
+            case "Livrari":
+                deleteMesage += "livrarea";
+                break;
+            case "Furnizori":
+                deleteMesage += "furnizorul";
+                break;
+            case "Magazine":
+                deleteMesage += "magazinul";
+                break;
+            case "Angajati":
+                deleteMesage += "angajatul";
                 break;
         }
     }
@@ -49,7 +62,10 @@
         elements.deleteDialog.show();
         var id = $(this).parent().parent().find("#id").text();
         elements.innerDialog.data("foo", id);
-        var name = $(this).parent().parent().find("#nume").text();
+        if ($(this).parent().parent().find("#nume"))
+            var name = $(this).parent().parent().find("#nume").text();
+        else 
+            var name = $(this).parent().parent().find("#id").text();
         getDeleteMessage();
         elements.deleteMesage.text(deleteMesage + " \"" + name + "\" ?");
     });

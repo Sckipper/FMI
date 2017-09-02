@@ -32,12 +32,12 @@
                     <thead>
                         <tr>
                             <th id="id"></th>
-                            <th class="col-xs-2">Categ Superioara</th>
-                            <th class="col-xs-2">Categorie</th>
-                            <th class="col-xs-1">Cod raft</th>
-                            <th class="col-xs-2">Descriere</th>
-                            <th class="col-xs-1">Imagine</th>
-                            <th class="col-xs-1 no-sort">
+                            <th>Categ Superioara</th>
+                            <th>Categorie</th>
+                            <th>Cod raft</th>
+                            <th>Descriere</th>
+                            <th>Imagine</th>
+                            <th class="endButtons no-sort">
                                 <button id="add" onclick="location.href='@Url.Action("Create", "Categories")'" />
                             </th>
                         </tr>
@@ -46,12 +46,15 @@
                         @foreach (var item in Model)
                         {
                             <tr class="addedrow">
-                                <td id="id">@item.ID</td>
-                                <td>@item.CategorieID</td>
+                                <td id="id">@item.ID/td>
+                                <td>@item.CategoryName</td>
                                 <td id="nume">@item.Nume</td>
                                 <td>@item.Cod</td>
                                 <td>@item.Descriere</td>
-                                <td>@item.Imagine</td>
+                                <td class="image">@if(item.Imagine != null)
+                                {
+                                    <img class="img" src="~/Content/ProductsImages/@(item.Imagine).png" />
+                                }</td>
                                 <td>
                                     <button class="edit" onclick="location.href='@Url.Action("Edit", "Categories", new { id = item.ID})'"></button>
                                     <button class="delete"></button>

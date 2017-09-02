@@ -21,6 +21,7 @@ namespace DatabaseModel
                 Cantitate = el.Cantitate,
                 DataExpirate = el.DataExpirate,
                 Descriere = el.Descriere,
+                Imagine = el.Imagine
             }).ToList();
         }
 

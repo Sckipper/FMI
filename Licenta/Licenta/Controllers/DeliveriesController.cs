@@ -10,69 +10,71 @@ using Licenta.Models;
 namespace Licenta.Controllers
 {
     [Authorize]
-    public class ProductsController : Controller
+    public class DeliveriesController : Controller
     {
-        // GET: Products
+        // GET: Deliveries
         public ActionResult Index()
         {
-            var products = new ProductsContainer().GetProducts();//.OrderBy(el => el.Nume);
+            var delivery = new DeliveryContainer().GetDeliveries();//.OrderBy(el => el.Nume);
 
-            return View(products);
+            return View(delivery);
         }
 
-        // GET: Products/Create
+        // GET: Deliveries/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Products/Create
+        // POST: Deliveries/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Delivery delivery)
         {
             if (ModelState.IsValid)
             {
-                ProductsContainer.SaveProduct(product);
+                delivery.Status = "Initiata";
+                delivery.DataSolicitare = DateTime.Now;
+                DeliveryContainer.SaveDelivery(delivery);
                 return RedirectToAction("Index");
             }
-            var model = new ProductModel();
-            model.Product = product;
+            var model = new DeliveryModel();
+            model.Delivery = delivery;
             return View(model);
         }
 
-        // POST: Products/Edit
+        // POST: Deliveries/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(Delivery delivery)
         {
             if (ModelState.IsValid)
             {
-                ProductsContainer.SaveProduct(product);
+                DeliveryContainer.SaveDelivery(delivery);
                 return RedirectToAction("Index");
             }
 
-            return View(product);
+            return View(delivery);
         }
 
 
-        // GET: Products/Edit/5
+        // GET: Deliveries/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var product = new Product();
-            product = ProductsContainer.getProductById((int)id);
+            var delivery = new Delivery();
+            delivery = DeliveryContainer.getDeliveryById((int)id);
 
-            return View(product);
+            return View(delivery);
         }
 
-        // GET: Products/Delete/5
+        // GET: Deliveries/Delete/5
         public ActionResult Delete(int id)
         {
             if (id < 1)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            CategoryContainer.DeleteCategory(id);
+            DeliveryContainer.DeleteDelivery(id);
 
             return RedirectToAction("Index");
         }

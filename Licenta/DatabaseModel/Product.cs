@@ -10,16 +10,17 @@ namespace DatabaseModel
     public class Product
     {
         public int ID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Categorie invalida")]
         public int CategorieID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Magazin invalid")]
         public int MagazinID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Denumire invalida")]
         public string Denumire { get; set; }
         public string Greutate { get; set; }
         public Nullable<double> Pret { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Cantitate invalida")]
         public int Cantitate { get; set; }
+
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<System.DateTime> DataExpirate { get; set; }
         public string Descriere { get; set; }

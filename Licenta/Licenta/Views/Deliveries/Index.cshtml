@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Produse";
+    ViewBag.Title = "Livrari";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -32,17 +32,16 @@
                     <thead>
                         <tr>
                             <th id="id"></th>
-                            <th>Categorie</th>
+                            <th>Furnizor</th>
                             <th>Magazin</th>
-                            <th>Produs</th>
-                            <th>Greutate</th>
-                            <th>Pret</th>
-                            <th>Cantitate</th>
-                            <th>Data Expirare</th>
+                            <th>Data solicitare</th>
+                            <th>Data livrare</th>
+                            <th>Status</th>
                             <th>Descriere</th>
+                            <th>Pret</th>
                             <th>Imagine</th>
-                            <th class="endButtons no-sort">
-                                <button id="add" onclick="location.href='@Url.Action("Create", "Products")'" />
+                            <th class="col-xs-1 no-sort">
+                                <button id="add" onclick="location.href='@Url.Action("Create", "Deliveries")'" />
                             </th>
                         </tr>
                     </thead>
@@ -51,20 +50,16 @@
                         {
                             <tr class="addedrow">
                                 <td id="id">@item.ID</td>
-                                <td>@item.CategorieID</td>
+                                <td>@item.FurnizorID</td>
                                 <td>@item.MagazinID</td>
-                                <td id="nume">@item.Denumire</td>
-                                <td>@item.Greutate</td>
-                                <td>@item.Pret</td>
-                                <td>@item.Cantitate</td>
-                                <td>@(item.DataExpirate != null ? item.DataExpirate.ToShortDateString() : "")</td>
+                                <td>@item.DataSolicitare</td>
+                                <td>@item.DataLivrare</td>
+                                <td>@item.Status</td>
                                 <td>@item.Descriere</td>
-                                <td class="image">@if (item.Imagine != null)
-                                {
-                                    <img class="img" src="~/Content/ProductsImages/@(item.Imagine).png" /> 
-                                }</td>
+                                <td>@item.Pret</td>
+                                <td>@item.Imagine</td>
                                 <td>
-                                    <button class="edit" onclick="location.href='@Url.Action("Edit", "Products", new { id = item.ID})'"></button>
+                                    <button class="edit" onclick="location.href='@Url.Action("Edit", "Categories", new { id = item.ID})'"></button>
                                     <button class="delete"></button>
                                 </td>
                             </tr>
@@ -83,3 +78,4 @@
         <button id="deleteDialogTrue" class="col-xs-2 col-xs-offset-4 btn btn-primary">Da</button>
     </div>
 </div>
+

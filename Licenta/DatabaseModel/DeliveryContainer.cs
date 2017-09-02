@@ -8,9 +8,9 @@ namespace DatabaseModel
 {
     public class DeliveryContainer
     {
-        public List<Livrare> GetDeliveries()
+        public List<Delivery> GetDeliveries()
         {
-            return new ShopAppEntities().Livrare.Select(el => new Livrare()
+            return new ShopAppEntities().Livrare.Select(el => new Delivery()
             {
                 ID = el.ID,
                 FurnizorID = el.FurnizorID,
@@ -24,7 +24,26 @@ namespace DatabaseModel
             }).ToList();
         }
 
-        public static void SaveDelivery(Livrare delivery)
+        public static Delivery getDeliveryById(int id)
+        {
+            using (var db = new ShopAppEntities())
+            {
+                Livrare del = db.Livrare.FirstOrDefault(el => el.ID == id);
+                return new Delivery()
+                {
+                    ID = del.ID,
+                    FurnizorID = del.FurnizorID,
+                    MagazinID = del.MagazinID,
+                    DataSolicitare = del.DataSolicitare,
+                    DataLivrare = del.DataLivrare,
+                    Status = del.Status,
+                    Descriere = del.Descriere,
+                    Pret = del.Pret
+                };
+            }
+        }
+
+        public static void SaveDelivery(Delivery delivery)
         {
             if (delivery == null)
                 throw new ArgumentNullException("Delivery");
@@ -50,14 +69,11 @@ namespace DatabaseModel
             }
         }
 
-        public static void DeleteDelivery(Livrare delivery)
+        public static void DeleteDelivery(int id)
         {
-            if (delivery == null)
-                throw new ArgumentNullException("Delivery");
-
             using (var db = new ShopAppEntities())
             {
-                Livrare liv = db.Livrare.FirstOrDefault(el => el.ID == delivery.ID);
+                Livrare liv = db.Livrare.FirstOrDefault(el => el.ID == id);
                 if (liv != null)
                 {
                     db.Livrare.Remove(liv);

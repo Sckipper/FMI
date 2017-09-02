@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DatabaseModel
 {
     public class CategoryContainer
     {
-        public List<Category> GetCategories()
+        public static List<Category> GetCategories()
         {
             return new ShopAppEntities().Categorie.Select(el => new Category()
             {
@@ -36,7 +34,6 @@ namespace DatabaseModel
                     Imagine = cat.Imagine
                 };
             }
-                
         }
 
         public static void SaveCategory(Category category)
