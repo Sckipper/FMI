@@ -9,5 +9,7 @@ namespace Licenta.Models
     public class DeliveryModel
     {
         public Delivery Delivery { get; set; }
+        public List<Supplier> Suppliers { get; set; }
+        public List<Market> Markets { get; set; }
     }
 }

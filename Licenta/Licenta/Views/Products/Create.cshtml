@@ -3,7 +3,9 @@
     ViewBag.Title = "Produse";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 @Scripts.Render("~/bundles/Logged")
 
@@ -13,7 +15,7 @@
     @Html.AntiForgeryToken()
 
     <div class="container pagination-centered">
-        <div class="containerWrapper col-md-6 col-md-offset-3">
+        <div class="containerWrapper col-md-8 col-md-offset-2">
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <h3>Produs nou:</h3>
@@ -22,14 +24,16 @@
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Categorie:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.Product.CategorieID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.DropDownListFor(model => Model.Product.CategorieID, new SelectList(Model.Categories, "Id", "Nume")
+                       , new { @class = "form-control text-box single-line selectpicker" })
                             @Html.ValidationMessageFor(model => Model.Product.CategorieID, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Magazin:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.Product.MagazinID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.DropDownListFor(model => Model.Product.MagazinID, new SelectList(Model.Markets, "Id", "Denumire")
+                       , new { @class = "form-control text-box single-line selectpicker" })
                             @Html.ValidationMessageFor(model => Model.Product.MagazinID, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -64,7 +68,7 @@
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">DataExipirare:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.Product.DataExpirate, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
+                            @Html.EditorFor(model => Model.Product.DataExpirate, new { htmlAttributes = new { @class = "form-control datepicker", @rows = 8, @readonly = "readonly" } })
                             @Html.ValidationMessageFor(model => Model.Product.DataExpirate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -78,8 +82,7 @@
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Imagine:</strong>
                         <div class="col-md-8">
-                            @using (Html.BeginForm("FileUpload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                            {   <input type="file" name="file" id="file" class="col-md-8" />    }
+                            @Html.TextBoxFor(m => Model.file, new { type = "file", name = "file" })
                         </div>
                     </div>
                 </div>
@@ -89,11 +92,19 @@
                     <div class="col-md-offset-2 col-md-10 ">
                         <input type="submit" value="Creaza" class="btn btn-primary" />
                     </div>
+                    
                 </div>
             </div>
         </div>
     </div>
 }
+
+<script>
+    $(function () {
+        $(".datepicker").datepicker();
+    });
+</script>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -8,9 +8,9 @@ namespace DatabaseModel
 {
     public class MarketContainer
     {
-        public List<Magazin> GetMarkets()
+        public static List<Market> GetMarkets()
         {
-            return new ShopAppEntities().Magazin.Select(el => new Magazin()
+            return new ShopAppEntities().Magazin.Select(el => new Market()
             {
                 ID = el.ID,
                 Adresa = el.Adresa,

@@ -8,7 +8,7 @@ namespace DatabaseModel
 {
     public class ProductsContainer
     {
-        public List<Product> GetProducts()
+        public static List<Product> GetProducts()
         {
             return new ShopAppEntities().Produs.Select(el => new Product()
             {
@@ -53,6 +53,7 @@ namespace DatabaseModel
 
             using (var db = new ShopAppEntities())
             {
+
                 Produs prod = db.Produs.FirstOrDefault(el => el.ID == product.ID);
                 if (prod == null)
                 {
@@ -68,19 +69,17 @@ namespace DatabaseModel
                 prod.Cantitate = product.Cantitate;
                 prod.DataExpirate = product.DataExpirate;
                 prod.Descriere = product.Descriere;
+                prod.Imagine = "img_" + prod.Denumire.ToLower();
 
                 db.SaveChanges();
             }
         }
 
-        public static void DeleteProduct(Product product)
+        public static void DeleteProduct(int id)
         {
-            if (product == null)
-                throw new ArgumentNullException("product");
-
             using (var db = new ShopAppEntities())
             {
-                Produs prod = db.Produs.FirstOrDefault(el => el.ID == product.ID);
+                Produs prod = db.Produs.FirstOrDefault(el => el.ID == id);
                 if (prod != null)
                 {
                     db.Produs.Remove(prod);

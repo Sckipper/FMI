@@ -66,10 +66,12 @@ namespace Licenta.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var category = new Category();
-            category = CategoryContainer.getCategoryById((int)id);
 
-            return View(category);
+            var model = new CategoryModel();
+            model.Categories = CategoryContainer.GetCategories();
+            model.Category = CategoryContainer.getCategoryById((int)id);
+
+            return View(model);
         }
 
         // GET: Categoriees/Delete/5

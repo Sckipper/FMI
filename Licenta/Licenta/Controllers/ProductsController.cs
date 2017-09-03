@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using DatabaseModel;
 using System.Net;
 using Licenta.Models;
+using System.IO;
 
 namespace Licenta.Controllers
 {
@@ -15,7 +13,15 @@ namespace Licenta.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            var products = new ProductsContainer().GetProducts();//.OrderBy(el => el.Nume);
+            var products = ProductsContainer.GetProducts();
+            var categories = CategoryContainer.GetCategories();
+            var markets = MarketContainer.GetMarkets();
+
+            foreach(var prod in products)
+            {
+                prod.CategoryName = categories.Where(el => el.ID == prod.CategorieID).FirstOrDefault().Nume;
+                prod.MarketName = markets.Where(el => el.ID == prod.MagazinID).FirstOrDefault().Denumire;
+            }
 
             return View(products);
         }
@@ -23,21 +29,29 @@ namespace Licenta.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new ProductModel();
+            model.Categories = CategoryContainer.GetCategories();
+            model.Markets = MarketContainer.GetMarkets();
+            return View(model);
         }
 
         // POST: Products/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Product product)
+        public ActionResult Create(ProductModel model)
         {
             if (ModelState.IsValid)
             {
-                ProductsContainer.SaveProduct(product);
+                if (model.file != null)
+                {
+                    var filename = Path.GetFileName(model.file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Uploads/Photo/"), filename);
+                    model.file.SaveAs(path);
+                }
+
+                ProductsContainer.SaveProduct(model.Product);
                 return RedirectToAction("Index");
             }
-            var model = new ProductModel();
-            model.Product = product;
             return View(model);
         }
 
@@ -61,10 +75,13 @@ namespace Licenta.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var product = new Product();
-            product = ProductsContainer.getProductById((int)id);
 
-            return View(product);
+            var model = new ProductModel();
+            model.Product = ProductsContainer.getProductById((int)id);
+            model.Categories = CategoryContainer.GetCategories();
+            model.Markets = MarketContainer.GetMarkets();
+
+            return View(model);
         }
 
         // GET: Products/Delete/5
@@ -72,7 +89,7 @@ namespace Licenta.Controllers
         {
             if (id < 1)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            CategoryContainer.DeleteCategory(id);
+            ProductsContainer.DeleteProduct(id);
 
             return RedirectToAction("Index");
         }

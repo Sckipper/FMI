@@ -213,7 +213,7 @@ textarea {
 }
 
 .endButtons{
-    width: 50px;
+    width: 51px;
 }
 
 .img {
@@ -235,4 +235,12 @@ textarea {
     -ms-transform: scale(10); /* IE 9 */
     -o-transform: scale(10); /* Opera */
     transform: scale(10);
+}
+
+.container{
+    padding: 0;
+}
+
+textarea{
+    width: 100%;
 }

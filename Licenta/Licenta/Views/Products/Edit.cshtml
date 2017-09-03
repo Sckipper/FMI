@@ -1,9 +1,11 @@
-﻿@model DatabaseModel.Product
+﻿@model Licenta.Models.ProductModel
 @{
     ViewBag.Title = "Produse";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 @Styles.Render("~/Content/Products")
 @Scripts.Render("~/bundles/Logged")
@@ -14,73 +16,75 @@
     @Html.AntiForgeryToken()
 
     <div class="container pagination-centered">
-        <div class="containerWrapper col-md-6 col-md-offset-3">
+        <div class="containerWrapper col-md-8 col-md-offset-2">
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.ID)
+                @Html.HiddenFor(model => model.Product.ID)
                 <br />
                 <div class="form-group">
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Categorie:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.CategorieID, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => Model.CategorieID, "", new { @class = "text-danger" })
+                            @Html.DropDownListFor(model => Model.Product.CategorieID, new SelectList(Model.Categories, "Id", "Nume")
+                       , new { @class = "form-control text-box single-line selectpicker" })
+                            @Html.ValidationMessageFor(model => Model.Product.CategorieID, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Magazin:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.MagazinID, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => Model.MagazinID, "", new { @class = "text-danger" })
+                            @Html.DropDownListFor(model => Model.Product.MagazinID, new SelectList(Model.Markets, "Id", "Denumire")
+                       , new { @class = "form-control text-box single-line selectpicker" })
+                            @Html.ValidationMessageFor(model => Model.Product.MagazinID, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Denumire:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.Denumire, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => Model.Denumire, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => Model.Product.Denumire, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => Model.Product.Denumire, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Greutate:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.Greutate, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => Model.Greutate, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => Model.Product.Greutate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => Model.Product.Greutate, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Pret:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.Pret, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
-                            @Html.ValidationMessageFor(model => Model.Pret, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => Model.Product.Pret, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
+                            @Html.ValidationMessageFor(model => Model.Product.Pret, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Cantitate:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.Cantitate, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
-                            @Html.ValidationMessageFor(model => Model.Cantitate, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => Model.Product.Cantitate, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
+                            @Html.ValidationMessageFor(model => Model.Product.Cantitate, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">DataExipirare:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.DataExpirate, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
-                            @Html.ValidationMessageFor(model => Model.DataExpirate, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => Model.Product.DataExpirate, new { htmlAttributes = new { @class = "datepicker form-control", id = "date", @rows = 8, @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => Model.Product.DataExpirate, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Pret:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.Descriere, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
-                            @Html.ValidationMessageFor(model => Model.Descriere, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => Model.Product.Descriere, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
+                            @Html.ValidationMessageFor(model => Model.Product.Descriere, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Descriere:</strong>
                         <div class="col-md-8">
-                            @Html.TextAreaFor(model => Model.Descriere, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
-                            @Html.ValidationMessageFor(model => Model.Descriere, "", new { @class = "text-danger" })
+                            @Html.TextAreaFor(model => Model.Product.Descriere, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
+                            @Html.ValidationMessageFor(model => Model.Product.Descriere, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
@@ -102,3 +106,15 @@
     </div>
 }
 
+<script>
+    $(function () {
+        var dateParts = null;
+        $(".datepicker").datepicker();
+        if ($("#date").val()) {
+            dateParts = $("#date").val().split("/");
+            var dateObject = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+            console.log($("#date").val(), dateObject );
+            $(".datepicker").datepicker("setDate", dateObject);
+        }        
+    });
+</script>

@@ -10,8 +10,10 @@ namespace DatabaseModel
     public class Product
     {
         public int ID { get; set; }
+        public string CategoryName { get; set; }
         [Required(ErrorMessage = "Categorie invalida")]
         public int CategorieID { get; set; }
+        public string MarketName { get; set; }
         [Required(ErrorMessage = "Magazin invalid")]
         public int MagazinID { get; set; }
         [Required(ErrorMessage = "Denumire invalida")]
