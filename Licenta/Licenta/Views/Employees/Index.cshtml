@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Furnizari";
+    ViewBag.Title = "Angajati";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -32,12 +32,17 @@
                     <thead>
                         <tr>
                             <th id="id"></th>
+                            <th>Magazin</th>
                             <th>Nume</th>
-                            <th>Adresa</th>
-                            <th>Oras</th>
-                            <th>Telefon</th>
+                            <th>Prenume</th>
+                            <th>CNP</th>
+                            <th>Email</th>
+                            <th>Parola</th>
+                            <th>Data angajare</th>
+                            <th>Salariu</th>
+                            <th>Functie</th>
                             <th class="col-xs-1 no-sort">
-                                <button id="add" onclick="location.href='@Url.Action("Create", "Suppliers")'" />
+                                <button id="add" onclick="location.href='@Url.Action("Create", "Employees")'" />
                             </th>
                         </tr>
                     </thead>
@@ -46,12 +51,17 @@
                         {
                             <tr class="addedrow">
                                 <td id="id">@item.ID</td>
+                                <td>@item.MarketName</td>
                                 <td id="nume">@item.Nume</td>
-                                <td>@item.Adresa</td>
-                                <td>@item.Oras</td>
-                                <td>@item.Telefon</td>
+                                <td>@item.Prenume</td>
+                                <td>@item.CNP</td>
+                                <td>@item.Email</td>
+                                <td>@item.Parola</td>
+                                <td>@(item.DataAngajare != null ? item.DataAngajare.ToShortDateString() : "")</td>
+                                <td>@item.Salariu</td>
+                                <td>@item.Functie</td>
                                 <td>
-                                    <button class="edit" onclick="location.href='@Url.Action("Edit", "Suppliers", new { id = item.ID})'"></button>
+                                    <button class="edit" onclick="location.href='@Url.Action("Edit", "Employees", new { id = item.ID})'"></button>
                                     <button class="delete"></button>
                                 </td>
                             </tr>

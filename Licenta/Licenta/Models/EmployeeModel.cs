@@ -9,5 +9,6 @@ namespace Licenta.Models
     public class EmployeeModel
     {
         public Employee Employee { get; set; }
+        public List<Market> Markets { get; set; }
     }
 }

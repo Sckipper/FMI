@@ -21,7 +21,23 @@ namespace DatabaseModel
             }).ToList();
         }
 
-        public static void SaveMarket(Magazin market)
+        public static Market getMarketById(int id)
+        {
+            using (var db = new ShopAppEntities())
+            {
+                Magazin mag = db.Magazin.FirstOrDefault(el => el.ID == id);
+                return new Market()
+                {
+                    ID = mag.ID,
+                    Adresa = mag.Adresa,
+                    Denumire = mag.Denumire,
+                    Imagine = mag.Imagine,
+                    Oras = mag.Oras
+                };
+            }
+        }
+
+        public static void SaveMarket(Market market)
         {
             if (market == null)
                 throw new ArgumentNullException("Market");
@@ -44,14 +60,14 @@ namespace DatabaseModel
             }
         }
 
-        public static void DeleteMatket(Magazin market)
+        public static void DeleteMatket(int id)
         {
-            if (market == null)
+            if (id <= 0)
                 throw new ArgumentNullException("Market");
 
             using (var db = new ShopAppEntities())
             {
-                Magazin mag = db.Magazin.FirstOrDefault(el => el.ID == market.ID);
+                Magazin mag = db.Magazin.FirstOrDefault(el => el.ID == id);
                 if (mag != null)
                 {
                     db.Magazin.Remove(mag);

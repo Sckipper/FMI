@@ -8,9 +8,9 @@ namespace DatabaseModel
 {
     public class EmployeeContainer
     {
-        public List<Angajat> GetEmployees()
+        public static List<Employee> GetEmployees()
         {
-            return new ShopAppEntities().Angajat.Select(el => new Angajat()
+            return new ShopAppEntities().Angajat.Select(el => new Employee()
             {
                 ID = el.ID,
                 MagazinID = el.MagazinID,
@@ -26,7 +26,28 @@ namespace DatabaseModel
             }).ToList();
         }
 
-        public static void SaveEmployees(Angajat employee)
+        public static Employee getEmployeeById(int id)
+        {
+            using (var db = new ShopAppEntities())
+            {
+                Angajat ang = db.Angajat.FirstOrDefault(el => el.ID == id);
+                return new Employee()
+                {
+                    ID = ang.ID,
+                    MagazinID = ang.MagazinID,
+                    Nume = ang.Nume,
+                    Prenume = ang.Prenume,
+                    CNP = ang.CNP,
+                    Email = ang.Email,
+                    Parola = ang.Parola,
+                    DataAngajare = ang.DataAngajare,
+                    Salariu = ang.Salariu,
+                    Functie = ang.Functie
+                };
+            }
+        }
+
+        public static void SaveEmployee(Employee employee)
         {
             if (employee == null)
                 throw new ArgumentNullException("Employee");
@@ -54,14 +75,14 @@ namespace DatabaseModel
             }
         }
 
-        public static void DeleteProduct(Angajat employee)
+        public static void DeleteEmployee(int id)
         {
-            if (employee == null)
+            if (id <= 0)
                 throw new ArgumentNullException("Employee");
 
             using (var db = new ShopAppEntities())
             {
-                Angajat ang = db.Angajat.FirstOrDefault(el => el.ID == employee.ID);
+                Angajat ang = db.Angajat.FirstOrDefault(el => el.ID == id);
                 if (ang != null)
                 {
                     db.Angajat.Remove(ang);

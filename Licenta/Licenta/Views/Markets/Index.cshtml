@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Furnizari";
+    ViewBag.Title = "Magazine";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -32,12 +32,12 @@
                     <thead>
                         <tr>
                             <th id="id"></th>
-                            <th>Nume</th>
                             <th>Adresa</th>
+                            <th>Denumire</th>
                             <th>Oras</th>
-                            <th>Telefon</th>
+                            <th>Imagine</th>
                             <th class="col-xs-1 no-sort">
-                                <button id="add" onclick="location.href='@Url.Action("Create", "Suppliers")'" />
+                                <button id="add" onclick="location.href='@Url.Action("Create", "Markets")'" />
                             </th>
                         </tr>
                     </thead>
@@ -46,12 +46,12 @@
                         {
                             <tr class="addedrow">
                                 <td id="id">@item.ID</td>
-                                <td id="nume">@item.Nume</td>
                                 <td>@item.Adresa</td>
+                                <td id="nume">@item.Denumire</td>
                                 <td>@item.Oras</td>
-                                <td>@item.Telefon</td>
+                                <td><img class="img" src="~/Content/ProductsImages/@(item.Imagine).png" /></td>
                                 <td>
-                                    <button class="edit" onclick="location.href='@Url.Action("Edit", "Suppliers", new { id = item.ID})'"></button>
+                                    <button class="edit" onclick="location.href='@Url.Action("Edit", "Markets", new { id = item.ID})'"></button>
                                     <button class="delete"></button>
                                 </td>
                             </tr>
