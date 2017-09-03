@@ -32,15 +32,12 @@
                     <thead>
                         <tr>
                             <th id="id"></th>
-                            <th>Furnizor</th>
-                            <th>Magazin</th>
-                            <th>Data solicitare</th>
-                            <th>Data livrare</th>
-                            <th>Status</th>
-                            <th>Descriere</th>
-                            <th>Pret</th>
+                            <th>Nume</th>
+                            <th>Adresa</th>
+                            <th>Oras</th>
+                            <th>Telefon</th>
                             <th class="col-xs-1 no-sort">
-                                <button id="add" onclick="location.href='@Url.Action("Create", "Deliveries")'" />
+                                <button id="add" onclick="location.href='@Url.Action("Create", "Suppliers")'" />
                             </th>
                         </tr>
                     </thead>
@@ -49,15 +46,12 @@
                         {
                             <tr class="addedrow">
                                 <td id="id">@item.ID</td>
-                                <td>@item.FurnizorID</td>
-                                <td>@item.MagazinID</td>
-                                <td>@(item.DataSolicitare != null ? item.DataSolicitare.ToShortDateString() : "")</td>
-                                <td>@item.DataLivrare</td>
-                                <td id="status">@item.Status</td>
-                                <td>@item.Descriere</td>
-                                <td>@item.Pret</td>
+                                <td id="nume">@item.Nume</td>
+                                <td>@item.Adresa</td>
+                                <td>@item.Oras</td>
+                                <td>@item.Telefon</td>
                                 <td>
-                                    <button class="edit" onclick="location.href='@Url.Action("Edit", "Deliveries", new { id = item.ID})'"></button>
+                                    <button class="edit" onclick="location.href='@Url.Action("Edit", "Suppliers", new { id = item.ID})'"></button>
                                     <button class="delete"></button>
                                 </td>
                             </tr>
@@ -76,23 +70,4 @@
         <button id="deleteDialogTrue" class="col-xs-2 col-xs-offset-4 btn btn-primary">Da</button>
     </div>
 </div>
-
-<script>
-    $('#status').each(function () {
-        switch ($(this).text()){
-            case "Initiata":
-                $(this).css('color', 'orange');
-                break;
-            case "Procesare":
-                $(this).css('color', 'green');
-                break;
-            case "Livrata":
-                $(this).css('color', 'blue');
-                break;
-            case "Refuzata":
-                $(this).css('color', 'red');
-                break;
-        }
-    });
-</script>
 

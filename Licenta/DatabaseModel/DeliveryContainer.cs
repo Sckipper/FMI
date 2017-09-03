@@ -8,7 +8,7 @@ namespace DatabaseModel
 {
     public class DeliveryContainer
     {
-        public List<Delivery> GetDeliveries()
+        public static List<Delivery> GetDeliveries()
         {
             return new ShopAppEntities().Livrare.Select(el => new Delivery()
             {

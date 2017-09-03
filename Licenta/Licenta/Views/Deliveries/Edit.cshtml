@@ -3,7 +3,6 @@
     ViewBag.Title = "Livrari";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 @Scripts.Render("~/bundles/Logged")
 
@@ -22,28 +21,23 @@
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Furnizor:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.Delivery.FurnizorID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.DropDownListFor(model => Model.Delivery.FurnizorID, new SelectList(Model.Suppliers, "Id", "Nume")
+                       , new { @class = "form-control text-box single-line selectpicker" })
                             @Html.ValidationMessageFor(model => Model.Delivery.FurnizorID, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Magazin:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.Delivery.MagazinID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.DropDownListFor(model => Model.Delivery.MagazinID, new SelectList(Model.Markets, "Id", "Denumire")
+                       , new { @class = "form-control text-box single-line selectpicker" })
                             @Html.ValidationMessageFor(model => Model.Delivery.MagazinID, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <strong class="control-label col-md-3 ">Data solicitare:</strong>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => Model.Delivery.DataSolicitare, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => Model.Delivery.DataSolicitare, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Status:</strong>
                         <div class="col-md-8">
-                            @Html.TextAreaFor(model => Model.Delivery.Status, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
+                            @Html.DropDownListFor(model => Model.Delivery.Status, new SelectList(Model.Statuses), new { @class = "form-control text-box single-line selectpicker" })
                             @Html.ValidationMessageFor(model => Model.Delivery.Status, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -57,7 +51,7 @@
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Pret:</strong>
                         <div class="col-md-8">
-                            @Html.TextAreaFor(model => Model.Delivery.Pret, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
+                            @Html.EditorFor(model => Model.Delivery.Pret, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
                             @Html.ValidationMessageFor(model => Model.Delivery.Pret, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -73,4 +67,3 @@
         </div>
     </div>
 }
-

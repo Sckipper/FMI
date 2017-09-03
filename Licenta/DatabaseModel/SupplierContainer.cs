@@ -8,9 +8,9 @@ namespace DatabaseModel
 {
     public class SupplierContainer
     {
-        public List<Furnizor> GetSuppliers()
+        public static List<Supplier> GetSuppliers()
         {
-            return new ShopAppEntities().Furnizor.Select(el => new Furnizor()
+            return new ShopAppEntities().Furnizor.Select(el => new Supplier()
             {
                 ID = el.ID,
                 Nume = el.Nume,
@@ -21,7 +21,23 @@ namespace DatabaseModel
             }).ToList();
         }
 
-        public static void SaveSupplier(Furnizor supplier)
+        public static Supplier getSupplierById(int id)
+        {
+            using (var db = new ShopAppEntities())
+            {
+                Furnizor supp = db.Furnizor.FirstOrDefault(el => el.ID == id);
+                return new Supplier()
+                {
+                    ID = supp.ID,
+                    Nume = supp.Nume,
+                    Adresa = supp.Adresa,
+                    Oras = supp.Oras,
+                    Telefon = supp.Telefon
+                };
+            }
+        }
+
+        public static void SaveSupplier(Supplier supplier)
         {
             if (supplier == null)
                 throw new ArgumentNullException("Supplier");
@@ -45,14 +61,15 @@ namespace DatabaseModel
             }
         }
 
-        public static void DeleteDelivery(Furnizor supplier)
+        public static void DeleteSupplier(int id)
         {
-            if (supplier == null)
+            if (id < 0)
                 throw new ArgumentNullException("Supplier");
 
             using (var db = new ShopAppEntities())
             {
-                Furnizor sup = db.Furnizor.FirstOrDefault(el => el.ID == supplier.ID);
+                Furnizor sup = db.Furnizor.FirstOrDefault(el => el.ID == id);
+
                 if (sup != null)
                 {
                     db.Furnizor.Remove(sup);

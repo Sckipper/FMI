@@ -11,5 +11,6 @@ namespace Licenta.Models
         public Delivery Delivery { get; set; }
         public List<Supplier> Suppliers { get; set; }
         public List<Market> Markets { get; set; }
+        public List<string> Statuses = new List<string>(new string[] { "Initiata", "Procesare", "Livrata", "Refuzata" });
     }
 }

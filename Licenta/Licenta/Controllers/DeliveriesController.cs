@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using DatabaseModel;
 using System.Net;
+using System.Linq;
 using Licenta.Models;
 
 namespace Licenta.Controllers
@@ -15,7 +13,15 @@ namespace Licenta.Controllers
         // GET: Deliveries
         public ActionResult Index()
         {
-            var delivery = new DeliveryContainer().GetDeliveries();//.OrderBy(el => el.Nume);
+            var markets = MarketContainer.GetMarkets();
+            var suppliers = SupplierContainer.GetSuppliers();
+            var delivery = DeliveryContainer.GetDeliveries();
+
+            foreach(var del in delivery)
+            {
+                del.SupplierName = suppliers.FirstOrDefault(x => x.ID == del.FurnizorID).Nume;
+                del.MarketName = markets.FirstOrDefault(x => x.ID == del.MagazinID).Denumire;
+            }
 
             return View(delivery);
         }
@@ -23,7 +29,11 @@ namespace Licenta.Controllers
         // GET: Deliveries/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new DeliveryModel();
+            model.Markets = MarketContainer.GetMarkets();
+            model.Suppliers = SupplierContainer.GetSuppliers();
+
+            return View(model);
         }
 
         // POST: Deliveries/Create
@@ -63,10 +73,13 @@ namespace Licenta.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var delivery = new Delivery();
-            delivery = DeliveryContainer.getDeliveryById((int)id);
 
-            return View(delivery);
+            var model = new DeliveryModel();
+            model.Delivery = DeliveryContainer.getDeliveryById((int)id);
+            model.Markets = MarketContainer.GetMarkets();
+            model.Suppliers = SupplierContainer.GetSuppliers();
+
+            return View(model);
         }
 
         // GET: Deliveries/Delete/5
