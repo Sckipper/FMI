@@ -3,6 +3,8 @@ using System.Web.Mvc;
 using DatabaseModel;
 using System.Net;
 using Licenta.Models;
+using System.Web;
+using System.IO;
 
 namespace Licenta.Controllers
 {
@@ -31,10 +33,18 @@ namespace Licenta.Controllers
         // POST: Categoriees/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Category category)
+        public ActionResult Create(HttpPostedFileBase postedFile, Category category)
         {
             if (ModelState.IsValid)
             {
+                if (postedFile != null)
+                {
+                    var filename = "img_" + category.Nume.ToLower() + ".png";
+                    var path = Path.Combine(Server.MapPath("~/Content/ProductsImages/"), filename);
+                    postedFile.SaveAs(path);
+                    category.Imagine = "img_" + category.Nume.ToLower();
+                }
+
                 CategoryContainer.SaveCategory(category);
                 return RedirectToAction("Index");
             }
@@ -46,10 +56,18 @@ namespace Licenta.Controllers
         // POST: Categoriees/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Category category)
+        public ActionResult Edit(HttpPostedFileBase postedFile, Category category)
         {
             if (ModelState.IsValid)
             {
+                if (postedFile != null)
+                {
+                    var filename = "img_" + category.Nume.ToLower() + ".png";
+                    var path = Path.Combine(Server.MapPath("~/Content/ProductsImages/"), filename);
+                    postedFile.SaveAs(path);
+                    category.Imagine = "img_" + category.Nume.ToLower();
+                }
+
                 CategoryContainer.SaveCategory(category);
                 return RedirectToAction("Index");
             }

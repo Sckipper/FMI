@@ -10,7 +10,7 @@
 @Styles.Render("~/Content/Products")
 @Scripts.Render("~/bundles/Logged")
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 
     @Html.AntiForgeryToken()
@@ -90,8 +90,7 @@
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Imagine:</strong>
                         <div class="col-md-8">
-                            @using (Html.BeginForm("FileUpload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                            {   <input type="file" name="file" id="file" class="col-md-8" />    }
+                            <input type="file" name="postedFile" />
                         </div>
                     </div>
                 </div>

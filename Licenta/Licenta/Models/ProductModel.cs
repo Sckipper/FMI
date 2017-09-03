@@ -12,7 +12,5 @@ namespace Licenta.Models
         public Product Product { get; set; }
         public List<Category> Categories { get; set; }
         public List<Market> Markets { get; set; }
-        [DataType(DataType.Upload)]
-        public HttpPostedFileBase file { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using DatabaseModel;
 using System.Net;
 using Licenta.Models;
 using System.IO;
+using System.Web;
 
 namespace Licenta.Controllers
 {
@@ -38,15 +39,16 @@ namespace Licenta.Controllers
         // POST: Products/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ProductModel model)
+        public ActionResult Create(HttpPostedFileBase postedFile, ProductModel model)
         {
             if (ModelState.IsValid)
             {
-                if (model.file != null)
+                if (postedFile != null)
                 {
-                    var filename = Path.GetFileName(model.file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Uploads/Photo/"), filename);
-                    model.file.SaveAs(path);
+                    var filename = "img_" + model.Product.Denumire.ToLower() + ".png";
+                    var path = Path.Combine(Server.MapPath("~/Content/ProductsImages/"), filename);
+                    postedFile.SaveAs(path);
+                    model.Product.Imagine = "img_" + model.Product.Denumire.ToLower();
                 }
 
                 ProductsContainer.SaveProduct(model.Product);
@@ -58,10 +60,18 @@ namespace Licenta.Controllers
         // POST: Products/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(HttpPostedFileBase postedFile, Product product)
         {
             if (ModelState.IsValid)
             {
+                if (postedFile != null)
+                {
+                    var filename = "img_" + product.Denumire.ToLower() + ".png";
+                    var path = Path.Combine(Server.MapPath("~/Content/ProductsImages/"), filename);
+                    postedFile.SaveAs(path);
+                    product.Imagine = "img_" + product.Denumire.ToLower();
+                }
+
                 ProductsContainer.SaveProduct(product);
                 return RedirectToAction("Index");
             }

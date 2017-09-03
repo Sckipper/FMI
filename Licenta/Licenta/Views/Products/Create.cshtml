@@ -9,9 +9,8 @@
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 @Scripts.Render("~/bundles/Logged")
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-
     @Html.AntiForgeryToken()
 
     <div class="container pagination-centered">
@@ -82,7 +81,7 @@
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Imagine:</strong>
                         <div class="col-md-8">
-                            @Html.TextBoxFor(m => Model.file, new { type = "file", name = "file" })
+                            <input type="file" name="postedFile" />
                         </div>
                     </div>
                 </div>

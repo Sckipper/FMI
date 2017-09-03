@@ -4,6 +4,8 @@ using DatabaseModel;
 using System.Net;
 using System.Linq;
 using Licenta.Models;
+using System.Web;
+using System.IO;
 
 namespace Licenta.Controllers
 {
@@ -27,10 +29,18 @@ namespace Licenta.Controllers
         // POST: Deliveries/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Market market)
+        public ActionResult Create(HttpPostedFileBase postedFile, Market market)
         {
             if (ModelState.IsValid)
             {
+                if (postedFile != null)
+                {
+                    var filename = "img_" + market.Denumire.ToLower() + ".png";
+                    var path = Path.Combine(Server.MapPath("~/Content/ProductsImages/"), filename);
+                    postedFile.SaveAs(path);
+                    market.Imagine = "img_" + market.Denumire.ToLower();
+                }
+
                 MarketContainer.SaveMarket(market);
                 return RedirectToAction("Index");
             }
@@ -43,10 +53,18 @@ namespace Licenta.Controllers
         // POST: Deliveries/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Market market)
+        public ActionResult Edit(HttpPostedFileBase postedFile, Market market)
         {
             if (ModelState.IsValid)
             {
+                if (postedFile != null)
+                {
+                    var filename = "img_" + market.Denumire.ToLower() + ".png";
+                    var path = Path.Combine(Server.MapPath("~/Content/ProductsImages/"), filename);
+                    postedFile.SaveAs(path);
+                    market.Imagine = "img_" + market.Denumire.ToLower();
+                }
+
                 MarketContainer.SaveMarket(market);
                 return RedirectToAction("Index");
             }
