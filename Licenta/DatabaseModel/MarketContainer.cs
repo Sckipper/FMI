@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,7 +61,7 @@ namespace DatabaseModel
             }
         }
 
-        public static void DeleteMatket(int id)
+        public static void DeleteMatket(int id, string path)
         {
             if (id <= 0)
                 throw new ArgumentNullException("Market");
@@ -70,6 +71,10 @@ namespace DatabaseModel
                 Magazin mag = db.Magazin.FirstOrDefault(el => el.ID == id);
                 if (mag != null)
                 {
+                    string fullPath = Path.Combine(path, mag.Imagine + ".png");
+                    if (File.Exists(fullPath))
+                        File.Delete(fullPath);
+
                     db.Magazin.Remove(mag);
                     db.SaveChanges();
                 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace DatabaseModel
@@ -64,13 +65,17 @@ namespace DatabaseModel
             }
         }
 
-        public static void DeleteCategory(int id)
+        public static void DeleteCategory(int id, string path)
         {
             using (var db = new ShopAppEntities())
             {
                 Categorie categ = db.Categorie.FirstOrDefault(el => el.ID == id);
                 if (categ != null)
                 {
+                    string fullPath = Path.Combine(path, categ.Imagine + ".png");
+                    if (File.Exists(fullPath))
+                        File.Delete(fullPath);
+
                     db.Categorie.Remove(categ);
                     db.SaveChanges();
                 }

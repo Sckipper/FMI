@@ -90,7 +90,9 @@ namespace Licenta.Controllers
         {
             if (id < 1)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            MarketContainer.DeleteMatket(id);
+
+            string serverpath = Server.MapPath("~/Content/ProductsImages/");
+            MarketContainer.DeleteMatket(id, serverpath);
 
             return RedirectToAction("Index");
         }

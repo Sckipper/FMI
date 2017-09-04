@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ namespace DatabaseModel
 {
     public class ProductsContainer
     {
+        public static object Request { get; private set; }
+
         public static List<Product> GetProducts()
         {
             return new ShopAppEntities().Produs.Select(el => new Product()
@@ -75,13 +78,17 @@ namespace DatabaseModel
             }
         }
 
-        public static void DeleteProduct(int id)
+        public static void DeleteProduct(int id, string path)
         {
             using (var db = new ShopAppEntities())
             {
                 Produs prod = db.Produs.FirstOrDefault(el => el.ID == id);
                 if (prod != null)
                 {
+                    string fullPath = Path.Combine(path, prod.Imagine + ".png");
+                    if (File.Exists(fullPath))
+                        File.Delete(fullPath);
+
                     db.Produs.Remove(prod);
                     db.SaveChanges();
                 }

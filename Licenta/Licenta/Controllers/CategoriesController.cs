@@ -94,7 +94,9 @@ namespace Licenta.Controllers
         {
             if (id < 1)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            CategoryContainer.DeleteCategory(id);
+
+            string serverpath = Server.MapPath("~/Content/ProductsImages/");
+            CategoryContainer.DeleteCategory(id, serverpath);
 
             return RedirectToAction("Index");
         }
