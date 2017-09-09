@@ -12,6 +12,11 @@
 <body>
     <div id="HeaderBar">
         <div id="userPanel">
+            @if (@Session["nume"] != null)
+            {
+                @Session["nume"].ToString();
+            }
+
             @if (SessionAccessor.LoggedUser != null)
             {
                 @(SessionAccessor.LoggedUser.Nume) }
@@ -30,16 +35,26 @@
         <img id="logoMenu" />    
         <div id="menu">
             <div id="menuContent">
+                <a onclick="location.href='@Url.Action("Home", "Home")'">Acasă</a>
                 <a onclick="location.href='@Url.Action("Index", "Categories")'" >Categorii</a>
                 <a onclick="location.href='@Url.Action("Index", "Products")'">Produse</a>
-                <a onclick="location.href='@Url.Action("Index", "Deliveries")'">Livrari</a>
+                <a onclick="location.href='@Url.Action("Index", "Deliveries")'">Livrări</a>
                 <a onclick="location.href='@Url.Action("Index", "Suppliers")'">Furnizori</a>
                 <a onclick="location.href='@Url.Action("Index", "Markets")'">Magazine</a>
-                <a onclick="location.href='@Url.Action("Index", "Employees")'">Angajati</a>
+                <a onclick="location.href='@Url.Action("Index", "Employees")'">Angajaţi</a>
             </div>
         </div> 
     </div>
     @RenderBody()  
+
+    <div id="deleteDialog">
+        <div id="innerDialog" class="col-md-4 col-md-offset-4 containerWrapper">
+            <h4 id="deleteMesage" ></h4>
+            <button id="deleteDialogFalse" class="col-xs-2 col-xs-offset-2 btn btn-primary">Nu</button>
+            <button id="deleteDialogTrue" class="col-xs-2 col-xs-offset-4 btn btn-primary">Da</button>
+        </div>
+    </div>
+
 </body>
 </html>
 

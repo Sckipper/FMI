@@ -4,6 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 @Scripts.Render("~/bundles/Logged")
 
@@ -65,21 +68,26 @@
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Data angajare:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.Employee.Parola, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
+                            @Html.EditorFor(model => Model.Employee.Parola, new { htmlAttributes = new { @class = "datepicker form-control", @rows = 8, @readonly = "readonly" } })
                             @Html.ValidationMessageFor(model => Model.Employee.Parola, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Salariu:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.Employee.Parola, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
+                            @Html.EditorFor(model => Model.Employee.Parola, new { htmlAttributes = new { @class = "form-control", @rows = 8, @type="number" } })
                             @Html.ValidationMessageFor(model => Model.Employee.Parola, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Functie:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.Employee.Functie, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
+                            <select class="form-control text-box single-line selectpicker">
+                                <option value="1">Angajat</option>
+                                <option value="2">Manager magazin</option>
+                                <option value="3">Sef magazin</option>
+                                <option value="0">Furnizor</option>
+                            </select>
                             @Html.ValidationMessageFor(model => Model.Employee.Functie, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -93,6 +101,13 @@
             </div>
         </div>
     </div>
+
+<script>
+    $(function () {
+        $(".datepicker").datepicker();
+    });
+</script>
+
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -12,7 +12,7 @@ namespace DatabaseModel
         public string Nume { get; set; }
         public string Prenume { get; set; }
         [Required(ErrorMessage = "CNP invalid")]
-        public decimal CNP { get; set; }
+        public long CNP { get; set; }
         public string Email { get; set; }
         [Required(ErrorMessage = "Parola obligatorie")]
         public string Parola { get; set; }

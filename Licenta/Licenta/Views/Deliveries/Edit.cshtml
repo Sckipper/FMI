@@ -16,6 +16,8 @@
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.Delivery.ID)
+                @Html.HiddenFor(model => model.Delivery.DataSolicitare)
+                @Html.HiddenFor(model => model.Delivery.DataLivrare)
                 <br />
                 <div class="form-group">
                     <div class="form-group">

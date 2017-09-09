@@ -24,7 +24,10 @@ namespace Licenta.Controllers
         // GET: Deliveries/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new EmployeeModel();
+            model.Markets = MarketContainer.GetMarkets();
+
+            return View(model);
         }
 
         // POST: Deliveries/Create
@@ -39,6 +42,7 @@ namespace Licenta.Controllers
             }
             var model = new EmployeeModel();
             model.Employee = employee;
+            model.Markets = MarketContainer.GetMarkets();
 
             return View(model);
         }
@@ -66,6 +70,7 @@ namespace Licenta.Controllers
 
             var model = new EmployeeModel();
             model.Employee = EmployeeContainer.getEmployeeById((int) id);
+            model.Markets = MarketContainer.GetMarkets();
 
             return View(model);
         }

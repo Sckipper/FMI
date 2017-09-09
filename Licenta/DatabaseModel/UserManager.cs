@@ -10,15 +10,15 @@ namespace DatabaseModel
 {
     public class UserManager
     {
-        public static Angajat GetEmployee(string email, string password)
+        public static Employee GetEmployee(string email, string password)
         {
-            return new ShopAppEntities().Angajat.AsEnumerable().Where(el => (el.Email == email) && (el.Parola == password)).Select(el => new Angajat()
+            return new ShopAppEntities().Angajat.AsEnumerable().Where(el => (el.Email == email) && (el.Parola == password)).Select(el => new Employee()
             {
                 ID = el.ID,
                 MagazinID = el.MagazinID,
                 Nume = el.Nume,
                 Prenume = el.Prenume,
-                CNP = el.CNP,
+                CNP = (long)el.CNP,
                 Email = el.Email,
                 Parola = el.Parola,
                 DataAngajare = el.DataAngajare,
@@ -41,7 +41,7 @@ namespace DatabaseModel
 
         public static User AuthentificateUser(string email, string password, bool remember)
         {
-            Angajat employee = GetEmployee(email, password);
+            Employee employee = GetEmployee(email, password);
 
             if (employee != null)
             {

@@ -194,9 +194,7 @@ textarea {
     padding: 15px;
     border-radius: 10px;
     z-index: 12;
-    top: 45%;
-    left: 30%;
-    margin: auto;
+    top: 40%;
     position: absolute;
 }
 

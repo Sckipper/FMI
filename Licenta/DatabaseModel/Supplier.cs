@@ -12,6 +12,6 @@ namespace DatabaseModel
         [Required(ErrorMessage = "Oras invalid")]
         public string Oras { get; set; }
         [Required(ErrorMessage = "Telefon invalida")]
-        public decimal Telefon { get; set; }
+        public long Telefon { get; set; }
     }
 }

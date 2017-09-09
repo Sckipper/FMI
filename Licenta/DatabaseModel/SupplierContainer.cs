@@ -16,7 +16,7 @@ namespace DatabaseModel
                 Nume = el.Nume,
                 Adresa = el.Adresa,
                 Oras = el.Oras,
-                Telefon = el.Telefon
+                Telefon = (long)el.Telefon
 
             }).ToList();
         }
@@ -32,7 +32,7 @@ namespace DatabaseModel
                     Nume = supp.Nume,
                     Adresa = supp.Adresa,
                     Oras = supp.Oras,
-                    Telefon = supp.Telefon
+                    Telefon = (long)supp.Telefon
                 };
             }
         }

@@ -49,11 +49,11 @@
                         {
                             <tr class="addedrow">
                                 <td id="id">@item.ID</td>
-                                <td>@item.FurnizorID</td>
-                                <td>@item.MagazinID</td>
+                                <td>@item.SupplierName</td>
+                                <td>@item.MarketName</td>
                                 <td>@(item.DataSolicitare != null ? item.DataSolicitare.ToShortDateString() : "")</td>
                                 <td>@item.DataLivrare</td>
-                                <td id="status">@item.Status</td>
+                                <td class="status">@item.Status</td>
                                 <td>@item.Descriere</td>
                                 <td>@item.Pret</td>
                                 <td>
@@ -69,16 +69,9 @@
     </div>
 </div>
 
-<div id="deleteDialog">
-    <div id="innerDialog" class="containerWrapper">
-        <h4 id="deleteMesage"></h4>
-        <button id="deleteDialogFalse" class="col-xs-2 col-xs-offset-2 btn btn-primary">Nu</button>
-        <button id="deleteDialogTrue" class="col-xs-2 col-xs-offset-4 btn btn-primary">Da</button>
-    </div>
-</div>
 
 <script>
-    $('#status').each(function () {
+    $('.status').each(function () {
         switch ($(this).text()){
             case "Initiata":
                 $(this).css('color', 'orange');

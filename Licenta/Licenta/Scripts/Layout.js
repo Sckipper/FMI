@@ -67,7 +67,8 @@
         else 
             var name = $(this).parent().parent().find("#id").text();
         getDeleteMessage();
-        elements.deleteMesage.text(deleteMesage + " \"" + name + "\" ?");
+        elements.deleteMesage.text(deleteMesage + (name?" \"" + name + "\"":" aceasta" )+" ?");
+        event.stopImmediatePropagation();
     });
 
     elements.deleteDialogFalse.click(function () {
