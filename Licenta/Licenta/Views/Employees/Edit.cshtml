@@ -3,7 +3,9 @@
     ViewBag.Title = "Angajati";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 @Scripts.Render("~/bundles/Logged")
 
@@ -63,6 +65,13 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <strong class="control-label col-md-3 ">Data angajare:</strong>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => Model.Employee.DataAngajare, new { htmlAttributes = new { @class = "datepicker form-control", id = "date", @rows = 8, @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => Model.Employee.DataAngajare, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <strong class="control-label col-md-3 ">Salariu:</strong>
                         <div class="col-md-8">
                             @Html.EditorFor(model => Model.Employee.Salariu, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
@@ -72,11 +81,11 @@
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Functie:</strong>
                         <div class="col-md-8">
-                            <select class="form-control text-box single-line selectpicker">
-                                <option value="1">Angajat</option>
-                                <option value="2">Manager magazin</option>
-                                <option value="3">Sef magazin</option>
-                                <option value="0">Furnizor</option>
+                            <select id="Functie" name="@Html.NameFor(model => model.Employee.Functie)" class="form-control text-box single-line selectpicker">
+                                <option value="Angajat" @(Model.Employee.Functie.Equals("Angajat")?"selected":"")> Angajat</option>
+                                <option value="Manager magazin" @(Model.Employee.Functie.Equals("Manager magazin") ?"selected":"")>Manager magazin</option>
+                                <option value="Sef magazin" @(Model.Employee.Functie.Equals("Sef magazin") ?"selected":"")>Sef magazin</option>
+                                <option value="Furnizor" @(Model.Employee.Functie.Equals("Furnizor") ?"selected":"")>Furnizor</option>
                             </select>
                             @Html.ValidationMessageFor(model => Model.Employee.Functie, "", new { @class = "text-danger" })
                         </div>
@@ -93,4 +102,17 @@
         </div>
     </div>
 }
+
+<script>
+    $(function () {
+        var dateParts = null;
+        $(".datepicker").datepicker();
+        if ($("#date").val()) {
+            dateParts = $("#date").val().split("/");
+            var dateObject = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+            console.log($("#date").val(), dateObject );
+            $(".datepicker").datepicker("setDate", dateObject);
+        }
+    });
+</script>
 

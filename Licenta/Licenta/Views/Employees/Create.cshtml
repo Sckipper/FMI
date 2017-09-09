@@ -68,25 +68,25 @@
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Data angajare:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.Employee.Parola, new { htmlAttributes = new { @class = "datepicker form-control", @rows = 8, @readonly = "readonly" } })
-                            @Html.ValidationMessageFor(model => Model.Employee.Parola, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => Model.Employee.DataAngajare, new { htmlAttributes = new { @class = "datepicker form-control", @rows = 8, @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => Model.Employee.DataAngajare, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Salariu:</strong>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => Model.Employee.Parola, new { htmlAttributes = new { @class = "form-control", @rows = 8, @type="number" } })
-                            @Html.ValidationMessageFor(model => Model.Employee.Parola, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => Model.Employee.Salariu, new { htmlAttributes = new { @class = "form-control", @rows = 8, @type="number" } })
+                            @Html.ValidationMessageFor(model => Model.Employee.Salariu, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <strong class="control-label col-md-3 ">Functie:</strong>
                         <div class="col-md-8">
-                            <select class="form-control text-box single-line selectpicker">
-                                <option value="1">Angajat</option>
-                                <option value="2">Manager magazin</option>
-                                <option value="3">Sef magazin</option>
-                                <option value="0">Furnizor</option>
+                            <select id="Functie" class="form-control text-box single-line selectpicker" name="@Html.NameFor(model => model.Employee.Functie)">
+                                <option value="Angajat">Angajat</option>
+                                <option value="Manager magazin">Manager magazin</option>
+                                <option value="Sef magazin">Sef magazin</option>
+                                <option value="Furnizor">Furnizor</option>
                             </select>
                             @Html.ValidationMessageFor(model => Model.Employee.Functie, "", new { @class = "text-danger" })
                         </div>
