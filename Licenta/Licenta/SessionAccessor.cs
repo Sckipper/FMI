@@ -16,6 +16,25 @@ namespace Licenta
             set { SetSessionValue(Keys.LoggedUser, value); }
         }
 
+        public static int getUserRole()
+        {
+            switch (SessionAccessor.LoggedUser.Functie)
+            {
+                case "Furnizor":
+                    return 0;
+                case "Angajat":
+                    return 1;
+                case "Manager magazin":
+                    return 2;
+                case "Sef magazin":
+                    return 3;
+                case "Admin":
+                    return 10;
+                default:
+                    return -1;
+            }
+        }
+
         private static T GetSessionValue<T>(string code) where T : class
         {
             if (string.IsNullOrWhiteSpace(code))

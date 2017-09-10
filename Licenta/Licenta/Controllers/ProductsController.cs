@@ -11,6 +11,21 @@ namespace Licenta.Controllers
     [Authorize]
     public class ProductsController : Controller
     {
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (SessionAccessor.LoggedUser == null)
+            {
+                filterContext.Result = RedirectToAction("Login", "Home");
+                return;
+            }
+
+            if ((int)Session["role"] < 1)
+            {
+                filterContext.Result = RedirectToAction("Home", "Home");
+                return;
+            }
+        }
+
         // GET: Products
         public ActionResult Index()
         {

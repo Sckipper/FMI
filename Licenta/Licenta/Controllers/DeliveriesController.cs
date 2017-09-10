@@ -10,7 +10,23 @@ namespace Licenta.Controllers
     [Authorize]
     public class DeliveriesController : Controller
     {
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (SessionAccessor.LoggedUser == null)
+            {
+                filterContext.Result = RedirectToAction("Login", "Home");
+                return;
+            }
+
+            if ((int)Session["role"] < 2 && (int)Session["role"] != 0)
+            {
+                filterContext.Result = RedirectToAction("Home", "Home");
+                return;
+            }
+        }
+
         // GET: Deliveries
+        [Authorize]
         public ActionResult Index()
         {
             var markets = MarketContainer.GetMarkets();
@@ -27,6 +43,7 @@ namespace Licenta.Controllers
         }
 
         // GET: Deliveries/Create
+        [Authorize]
         public ActionResult Create()
         {
             var model = new DeliveryModel();
@@ -38,6 +55,7 @@ namespace Licenta.Controllers
 
         // POST: Deliveries/Create
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Delivery delivery)
         {
@@ -55,6 +73,7 @@ namespace Licenta.Controllers
 
         // POST: Deliveries/Edit
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Delivery delivery)
         {
@@ -69,6 +88,7 @@ namespace Licenta.Controllers
 
 
         // GET: Deliveries/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -83,6 +103,7 @@ namespace Licenta.Controllers
         }
 
         // GET: Deliveries/Delete/5
+        [Authorize]
         public ActionResult Delete(int id)
         {
             if (id < 1)

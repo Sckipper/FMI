@@ -17,9 +17,9 @@
                 @Session["nume"].ToString();
             }
 
-            @if (SessionAccessor.LoggedUser != null)
+            @*@if (SessionAccessor.LoggedUser != null)
             {
-                @(SessionAccessor.LoggedUser.Nume) }
+                @(SessionAccessor.LoggedUser.Nume) }*@
             <span class="userBar">//</span>
             @if (SessionAccessor.LoggedUser != null)
             {
@@ -35,13 +35,30 @@
         <img id="logoMenu" />    
         <div id="menu">
             <div id="menuContent">
-                <a onclick="location.href='@Url.Action("Home", "Home")'">Acasă</a>
-                <a onclick="location.href='@Url.Action("Index", "Categories")'" >Categorii</a>
-                <a onclick="location.href='@Url.Action("Index", "Products")'">Produse</a>
-                <a onclick="location.href='@Url.Action("Index", "Deliveries")'">Livrări</a>
-                <a onclick="location.href='@Url.Action("Index", "Suppliers")'">Furnizori</a>
-                <a onclick="location.href='@Url.Action("Index", "Markets")'">Magazine</a>
-                <a onclick="location.href='@Url.Action("Index", "Employees")'">Angajaţi</a>
+                @if (@Session["role"] != null)
+                {
+                    <a onclick="location.href='@Url.Action("Home", "Home")'">Acasă</a>
+                    if ((int)@Session["role"] == 0)
+                    {
+                        <a onclick="location.href='@Url.Action("Index", "Deliveries")'">Livrări</a>
+                    }
+                    if ((int)@Session["role"] >= 1)
+                    {
+                        <a onclick="location.href='@Url.Action("Index", "Categories")'">Categorii</a>
+                        <a onclick="location.href='@Url.Action("Index", "Products")'">Produse</a>
+                    }
+                    if ((int)@Session["role"] >= 2)
+                    {
+                        <a onclick="location.href='@Url.Action("Index", "Deliveries")'">Livrări</a>
+                        <a onclick="location.href='@Url.Action("Index", "Employees")'">Angajaţi</a>
+
+                    }
+                    if ((int)@Session["role"] >= 3)
+                    {
+                        <a onclick="location.href='@Url.Action("Index", "Suppliers")'">Furnizori</a>
+                        <a onclick="location.href='@Url.Action("Index", "Markets")'">Magazine</a>
+                    }
+                }
             </div>
         </div> 
     </div>

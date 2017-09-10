@@ -10,6 +10,21 @@ namespace Licenta.Controllers
     [Authorize]
     public class EmployeesController : Controller
     {
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (SessionAccessor.LoggedUser == null)
+            {
+                filterContext.Result = RedirectToAction("Login", "Home");
+                return;
+            }
+
+            if ((int)Session["role"] < 2)
+            {
+                filterContext.Result = RedirectToAction("Home", "Home");
+                return;
+            }
+        }
+
         // GET: Suppliers
         public ActionResult Index()
         {

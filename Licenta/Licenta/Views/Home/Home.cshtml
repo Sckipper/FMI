@@ -1,6 +1,26 @@
 ﻿@{
     ViewBag.Title = "Home";
 }
+<div id="dashboardDiv">
+    <div id="panel1" class="dashboardPanel transitions">
+        <h2 class="dashboardTitle"></h2>
+        <div class="dashboardBody">
+            <div id="chart"></div>
+        </div>
+    </div>
+
+    <div id="panel2" class="dashboardPanel transitions">
+        <h2 class="dashboardTitle"></h2>
+        <div class="dashboardBody">
+            <div id="chart"></div>
+        </div>
+    </div>
+</div>
+
+<div id="role" >@Session["role"]</div>
+
+
 
 @Styles.Render("~/Content/Home")
 @Scripts.Render("~/bundles/Logged")
+<script src='@Scripts.Url("~/bundles/Home")'> </script>

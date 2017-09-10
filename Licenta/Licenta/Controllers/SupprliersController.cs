@@ -1,8 +1,6 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using DatabaseModel;
 using System.Net;
-using System.Linq;
 using Licenta.Models;
 
 namespace Licenta.Controllers
@@ -10,6 +8,21 @@ namespace Licenta.Controllers
     [Authorize]
     public class SuppliersController : Controller
     {
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (SessionAccessor.LoggedUser == null)
+            {
+                filterContext.Result = RedirectToAction("Login", "Home");
+                return;
+            }
+
+            if ((int)Session["role"] < 3)
+            {
+                filterContext.Result = RedirectToAction("Home", "Home");
+                return;
+            }
+        }
+
         // GET: Suppliers
         public ActionResult Index()
         {

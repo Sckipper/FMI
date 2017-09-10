@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DatabaseModel
@@ -14,5 +15,6 @@ namespace DatabaseModel
         public string Cod { get; set; }
         public string Descriere { get; set; }
         public string Imagine { get; set; }
+        public List<int> MarketCoords { get; set; }
     }
 }

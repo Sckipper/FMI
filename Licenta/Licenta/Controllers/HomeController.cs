@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Data;
 using Licenta.Models;
 using System.Web.Security;
 using DatabaseModel;
@@ -13,6 +10,7 @@ namespace Licenta.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+
         [AllowAnonymous]
         public ActionResult Login()
         {
@@ -30,10 +28,13 @@ namespace Licenta.Controllers
             if (ModelState.IsValid)
             {
                 SessionAccessor.LoggedUser = UserManager.AuthentificateUser(logmodel.Email, logmodel.Password, logmodel.RememberMe);
-
                 if (SessionAccessor.LoggedUser != null)
                 {
                     // Check the remember option for login
+                    Session["nume"] = SessionAccessor.LoggedUser.Nume;
+                    Session["functie"] = SessionAccessor.LoggedUser.Functie;
+                    Session["magazin"] = SessionAccessor.LoggedUser.Magazine;
+                    Session["role"] = SessionAccessor.getUserRole();
 
                     if (logmodel.RememberMe == true)
                     {
@@ -59,8 +60,16 @@ namespace Licenta.Controllers
       
         public ActionResult Home()
         {
-            if(SessionAccessor.LoggedUser == null)
-                return RedirectToAction("Login", "Home");
+            if (SessionAccessor.LoggedUser == null)
+                return RedirectToAction("Login");
+
+            switch (SessionAccessor.getUserRole())
+            {
+                case 0:
+                    ViewBag.
+                    break;
+            }
+
             return View();
         }
 

@@ -28,6 +28,10 @@ namespace Licenta
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/Home").Include(
+                      "~/Scripts/3rdParty/jquery.piegraph.js",
+                      "~/Scripts/Home.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
@@ -45,6 +49,8 @@ namespace Licenta
             bundles.Add(new StyleBundle("~/Content/Home").Include(
                       "~/Content/Home.css"
                       ));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

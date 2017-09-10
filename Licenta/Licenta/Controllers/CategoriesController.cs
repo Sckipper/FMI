@@ -8,10 +8,26 @@ using System.IO;
 
 namespace Licenta.Controllers
 {
-    [Authorize]
+    
     public class CategoriesController : Controller
     {
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (SessionAccessor.LoggedUser == null)
+            {
+                filterContext.Result = RedirectToAction("Login", "Home");
+                return;
+            }
+
+            if ((int)Session["role"] < 1)
+            {
+                filterContext.Result = RedirectToAction("Home", "Home");
+                return;
+            }
+        }
+
         // GET: Categories
+        [Authorize]
         public ActionResult Index()
         {
             var categories = CategoryContainer.GetCategories();
@@ -23,6 +39,7 @@ namespace Licenta.Controllers
         }
 
         // GET: Categoriees/Create
+        [Authorize]
         public ActionResult Create()
         {
             var model = new CategoryModel();
@@ -31,6 +48,7 @@ namespace Licenta.Controllers
         }
 
         // POST: Categoriees/Create
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(HttpPostedFileBase postedFile, Category category)
@@ -54,6 +72,7 @@ namespace Licenta.Controllers
         }
 
         // POST: Categoriees/Edit
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(HttpPostedFileBase postedFile, Category category)
@@ -77,6 +96,7 @@ namespace Licenta.Controllers
 
 
         // GET: Categoriees/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,6 +110,7 @@ namespace Licenta.Controllers
         }
 
         // GET: Categoriees/Delete/5
+        [Authorize]
         public ActionResult Delete(int id)
         {
             if (id < 1)

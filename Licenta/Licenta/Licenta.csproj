@@ -254,6 +254,7 @@
     <Content Include="Scripts\3rdParty\jquery-1.10.2.min.js" />
     <None Include="Scripts\3rdParty\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\3rdParty\jquery-ui.1.12.1.js" />
+    <Content Include="Scripts\3rdParty\jquery.piegraph.js" />
     <Content Include="Scripts\3rdParty\jquery.validate.js" />
     <Content Include="Scripts\3rdParty\jquery.validate.min.js" />
     <Content Include="Scripts\3rdParty\jquery.validate.unobtrusive.js" />
@@ -261,6 +262,8 @@
     <Content Include="Scripts\3rdParty\modernizr-2.6.2.js" />
     <Content Include="Scripts\3rdParty\respond.js" />
     <Content Include="Scripts\3rdParty\respond.min.js" />
+    <Content Include="Scripts\CodePicker.js" />
+    <Content Include="Scripts\Home.js" />
     <Content Include="Scripts\Layout.js" />
     <Content Include="Scripts\Logged.js" />
     <Content Include="Scripts\_references.js" />
@@ -302,6 +305,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\ProductsImages\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

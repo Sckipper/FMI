@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DatabaseModel
 {
@@ -11,5 +12,6 @@ namespace DatabaseModel
         [Required(ErrorMessage = "Imaginea magazinului este obligatorie")]
         public string Imagine { get; set; }
         public string Oras { get; set; }
+        public List<int> Coordonate { get; set; }
     }
 }
