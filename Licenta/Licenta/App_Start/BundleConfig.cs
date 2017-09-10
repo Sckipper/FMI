@@ -29,7 +29,8 @@ namespace Licenta
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/Home").Include(
-                      "~/Scripts/3rdParty/jquery.piegraph.js",
+                        "~/Scripts/3rdParty/d3.min.js",
+                      "~/Scripts/3rdParty/jquery.ntkPieChart.js",
                       "~/Scripts/Home.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(

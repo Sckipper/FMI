@@ -78,7 +78,18 @@ namespace Licenta.Controllers
                     break;
 
                 case 1:
-                    //var total categories
+                    var totalCategories = CategoryContainer.getNrOfCategories();
+                    model.dashboardMessage1 = "Gestionaţi " + totalCategories + (totalCategories > 1 ? " categorii" : " categorie");
+                    var primaryCategories = CategoryContainer.getNrOfPrimaryCategories();
+                    model.chart = "" + primaryCategories + "," + (totalCategories - primaryCategories);
+
+                    var totalProducts = ProductsContainer.getNrOfProducts();
+                    model.dashboardMessage2 = "Gestionaţi " + totalProducts + (totalProducts > 1 ? " produse" : " produs");
+                    var products3 = ProductsContainer.getNrOfProductsExpiredDays(3);
+                    var products7 = ProductsContainer.getNrOfProductsExpiredDays(7);
+                    var products30 = ProductsContainer.getNrOfProductsExpiredDays(30);
+                    model.chart2 = "" + products3 + "," + products7 + "," + products30;
+
                     break;
             }
 

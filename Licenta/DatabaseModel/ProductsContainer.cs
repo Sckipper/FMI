@@ -28,6 +28,17 @@ namespace DatabaseModel
             }).ToList();
         }
 
+        public static int getNrOfProductsExpiredDays(int nr)
+        {
+            var date = DateTime.Now.AddDays(nr);
+            return new ShopAppEntities().Produs.Where(el => el.DataExpirate.HasValue && el.DataExpirate.Value <= date).Count();
+        }
+
+        public static int getNrOfProducts()
+        {
+            return new ShopAppEntities().Produs.Count();
+        }
+
         public static Product getProductById(int id)
         {
             using (var db = new ShopAppEntities())

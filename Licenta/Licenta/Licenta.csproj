@@ -250,10 +250,12 @@
     <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <None Include="Scripts\3rdParty\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\3rdParty\d3.min.js" />
     <Content Include="Scripts\3rdParty\jquery-1.10.2.js" />
     <Content Include="Scripts\3rdParty\jquery-1.10.2.min.js" />
     <None Include="Scripts\3rdParty\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\3rdParty\jquery-ui.1.12.1.js" />
+    <Content Include="Scripts\3rdParty\jquery.ntkPieChart.js" />
     <Content Include="Scripts\3rdParty\jquery.piegraph.js" />
     <Content Include="Scripts\3rdParty\jquery.validate.js" />
     <Content Include="Scripts\3rdParty\jquery.validate.min.js" />

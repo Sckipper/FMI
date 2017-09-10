@@ -20,6 +20,16 @@ namespace DatabaseModel
             }).ToList();
         }
 
+        public static int getNrOfCategories()
+        {
+            return new ShopAppEntities().Categorie.Count();
+        }
+
+        public static int getNrOfPrimaryCategories()
+        {
+            return new ShopAppEntities().Categorie.Where(el => el.CategorieID == null).Count();
+        }
+
         public static Category getCategoryById(int id)
         {
             using (var db = new ShopAppEntities())

@@ -52,10 +52,18 @@ body {
     display:none;
 }
 
-#chart{
+.chart {
     padding: 40px;
+     width: 200px; 
+     height: 200px;
+     display: grid;
 }
 
-#chart table tr:hover {
+.chartHistory {
+    position: absolute;
+    margin-top: 50px;
+}
+
+.chartHistory table tr:hover {
     background: none;
 }

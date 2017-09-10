@@ -11,6 +11,7 @@ namespace Licenta.Models
         public string dashboardMessage1 { get; set; }
         public string dashboardMessage2 { get; set; }
         public string chart { get; set; }
+        public string chart2 { get; set; }
         public string Function { get; set; }
         public string Market { get; set; }
     }
