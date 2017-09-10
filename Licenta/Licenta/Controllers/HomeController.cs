@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Licenta.Models;
 using System.Web.Security;
 using DatabaseModel;
+using System.Collections.Generic;
 
 namespace Licenta.Controllers
 {
@@ -63,14 +64,25 @@ namespace Licenta.Controllers
             if (SessionAccessor.LoggedUser == null)
                 return RedirectToAction("Login");
 
+            var model = new HomeModel();
+
             switch (SessionAccessor.getUserRole())
             {
                 case 0:
-                    ViewBag.
+                    var pendingDeliveries = DeliveryContainer.getNrOfPendingDeliveries();
+                    model.dashboardMessage1 = "Aveti de făcut " + pendingDeliveries + (pendingDeliveries>1?" livrari":" livrare");
+                    var initiatedDeliveries = DeliveryContainer.getNrOfInitiatedDeliveries();
+                    var deliveredDeliveries = DeliveryContainer.getNrOfDeliveredDeliveries();
+                    var refusedDeliveries = DeliveryContainer.getNrOfRefusedDeliveries();
+                    model.chart = "" + initiatedDeliveries +","+ pendingDeliveries + "," + deliveredDeliveries + "," + refusedDeliveries;
+                    break;
+
+                case 1:
+                    //var total categories
                     break;
             }
 
-            return View();
+            return View(model);
         }
 
         public ActionResult Logout()

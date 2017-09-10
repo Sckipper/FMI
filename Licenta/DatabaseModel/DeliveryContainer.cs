@@ -24,6 +24,26 @@ namespace DatabaseModel
             }).ToList();
         }
 
+        public static int getNrOfPendingDeliveries()
+        {
+            return new ShopAppEntities().Livrare.Where(el => el.Status.Equals("Procesare")) .Count();
+        }
+
+        public static int getNrOfInitiatedDeliveries()
+        {
+            return new ShopAppEntities().Livrare.Where(el => el.Status.Equals("Initiata")).Count();
+        }
+
+        public static int getNrOfDeliveredDeliveries()
+        {
+            return new ShopAppEntities().Livrare.Where(el => el.Status.Equals("Livrata")).Count();
+        }
+
+        public static int getNrOfRefusedDeliveries()
+        {
+            return new ShopAppEntities().Livrare.Where(el => el.Status.Equals("Refuzata")).Count();
+        }
+
         public static Delivery getDeliveryById(int id)
         {
             using (var db = new ShopAppEntities())

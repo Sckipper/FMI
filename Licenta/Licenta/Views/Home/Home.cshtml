@@ -1,11 +1,13 @@
-﻿@{
+﻿@model Licenta.Models.HomeModel
+@{
     ViewBag.Title = "Home";
 }
 <div id="dashboardDiv">
     <div id="panel1" class="dashboardPanel transitions">
         <h2 class="dashboardTitle"></h2>
         <div class="dashboardBody">
-            <div id="chart"></div>
+            <span>@Model.dashboardMessage1</span>
+            <div id="chart" data="@Model.chart"></div>
         </div>
     </div>
 
@@ -18,6 +20,7 @@
 </div>
 
 <div id="role" >@Session["role"]</div>
+
 
 
 

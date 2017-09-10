@@ -81,10 +81,10 @@ namespace Licenta.Controllers
             {
                 if (postedFile != null)
                 {
-                    var filename = "img_" + product.Denumire.ToLower() + ".png";
+                    var filename = "img_" + product.Denumire.ToLower().Replace(' ', '_') + ".png";
                     var path = Path.Combine(Server.MapPath("~/Content/ProductsImages/"), filename);
                     postedFile.SaveAs(path);
-                    product.Imagine = "img_" + product.Denumire.ToLower();
+                    product.Imagine = "img_" + product.Denumire.ToLower().Replace(' ', '_');
                 }
 
                 ProductsContainer.SaveProduct(product);

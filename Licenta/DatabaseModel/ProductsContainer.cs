@@ -72,7 +72,8 @@ namespace DatabaseModel
                 prod.Cantitate = product.Cantitate;
                 prod.DataExpirate = product.DataExpirate;
                 prod.Descriere = product.Descriere;
-                prod.Imagine = "img_" + prod.Denumire.ToLower();
+                if(!String.IsNullOrWhiteSpace(product.Imagine))
+                    prod.Imagine = product.Imagine;
 
                 db.SaveChanges();
             }

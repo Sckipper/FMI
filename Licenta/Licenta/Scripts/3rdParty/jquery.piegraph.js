@@ -15,13 +15,13 @@
             labels: null
         };
         this.colors = [
-            'red',
+            'orange',
             'green',
+            'blue',
+            'red',
             'yellow',
             'grey',
-            'blue',
             'lime',
-            'orange',
             'purple'
         ];
 
@@ -52,7 +52,7 @@
             }
         };
         this.createLabels = function () {
-          var left = this.options.width * 0.6, rows = '', self = this;
+          var left = this.options.width * 0.9, rows = '', self = this;
           for (var i = 0; i < this.options.data.length; i++) {
             rows += '<tr><td style = \'background-color: ' + self.colors[i % self.colors.length] + '\'></td><td>' + this.options.data[i] + '</td><td>' + this.options.labels[i] + '</td></tr>';
           }

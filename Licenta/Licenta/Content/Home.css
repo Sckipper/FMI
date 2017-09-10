@@ -47,9 +47,15 @@ body {
     font-size: large;
 }
 
-.dashboardBody{
-}
 
 #role{
     display:none;
+}
+
+#chart{
+    padding: 40px;
+}
+
+#chart table tr:hover {
+    background: none;
 }
