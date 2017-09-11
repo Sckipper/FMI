@@ -1,17 +1,18 @@
-﻿@model Licenta.Models.CategoryModel
-@{
+﻿@{
     Layout = null;
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>GetCategories</title>
-</head>
-<body>
-    <div> 
-    </div>
-</body>
-</html>
+{
+"next": {
+    "$ref": ""
+  },
+  "items": [
+@foreach (var item in Model)
+{
+@Html.Raw("{\"id\": " + @item.ID + "," +
+            "\"denumire\": \"" + @item.Nume + "\"," +
+            "\"cod\": \"" + @item.Cod + "\"," +
+            "\"descriere\": \"" + @item.Descriere + "\"," +
+            "\"imagine\": \"" + @item.Imagine + "\"},")
+}
+  ]
+}

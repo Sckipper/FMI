@@ -1,0 +1,22 @@
+﻿@{
+    Layout = null;
+}
+{
+"next": {
+    "$ref": ""
+  },
+  "items": [
+@foreach (var item in Model)
+{
+    @Html.Raw("{\"id\": " + @item.ID + "," +
+            "\"categorieid\": \"" + @item.CategorieID + "\"," +
+            "\"denumire\": \"" + @item.Denumire + "\"," +
+            "\"greutate\": \"" + @item.Greutate + "\"," +
+            "\"pret\": " + @item.Pret + "," +
+            "\"cantitate\": " + @item.Cantitate + "," +
+            "\"dataexpirare\": \"" + @item.DataExpirate + "\"," +
+            "\"descriere\": \"" + @item.Descriere + "\"," +
+            "\"imagine\": \"" + @item.Imagine + "\"},")
+}
+    ]
+}

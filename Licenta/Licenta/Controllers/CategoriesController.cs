@@ -13,6 +13,10 @@ namespace Licenta.Controllers
     {
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            string actionName = filterContext.ActionDescriptor.ActionName;
+            if (actionName.Equals("GetCategories"))
+                return;
+
             if (SessionAccessor.LoggedUser == null)
             {
                 filterContext.Result = RedirectToAction("Login", "Home");
@@ -24,6 +28,13 @@ namespace Licenta.Controllers
                 filterContext.Result = RedirectToAction("Home", "Home");
                 return;
             }
+        }
+
+        [AllowAnonymous]
+        public ActionResult GetCategories()
+        {
+            var categories = CategoryContainer.GetCategories();
+            return View(categories);
         }
 
         // GET: Categories

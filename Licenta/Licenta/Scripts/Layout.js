@@ -24,7 +24,7 @@
                 break;
         }
     }
-
+    var role = parseInt($("#role").html());
     var elements = {
         addedrow: $(".addedrow"),
         table: $("#myTable"),
@@ -39,6 +39,7 @@
     elements.addedrow.mouseover(function () {
         if (!$(this).children("td").hasClass("selected")) {
             $(this).children("td").children(".edit").show();
+            if (role != 0)
             $(this).children("td").children(".delete").show();
         }
     });

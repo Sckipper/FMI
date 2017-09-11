@@ -8,11 +8,14 @@ using System.Web;
 
 namespace Licenta.Controllers
 {
-    [Authorize]
     public class ProductsController : Controller
     {
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            string actionName = filterContext.ActionDescriptor.ActionName;
+            if (actionName.Equals("GetProducts"))
+                return;
+
             if (SessionAccessor.LoggedUser == null)
             {
                 filterContext.Result = RedirectToAction("Login", "Home");
@@ -26,7 +29,15 @@ namespace Licenta.Controllers
             }
         }
 
+        [AllowAnonymous]
+        public ActionResult GetProducts()
+        {
+            var products = ProductsContainer.GetProducts();
+            return View(products);
+        }
+
         // GET: Products
+        [Authorize]
         public ActionResult Index()
         {
             var products = ProductsContainer.GetProducts();
@@ -43,6 +54,7 @@ namespace Licenta.Controllers
         }
 
         // GET: Products/Create
+        [Authorize]
         public ActionResult Create()
         {
             var model = new ProductModel();
@@ -53,6 +65,7 @@ namespace Licenta.Controllers
 
         // POST: Products/Create
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create(HttpPostedFileBase postedFile, ProductModel model)
         {
@@ -74,6 +87,7 @@ namespace Licenta.Controllers
 
         // POST: Products/Edit
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(HttpPostedFileBase postedFile, Product product)
         {
@@ -96,6 +110,7 @@ namespace Licenta.Controllers
 
 
         // GET: Products/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -110,6 +125,7 @@ namespace Licenta.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize]
         public ActionResult Delete(int id)
         {
             if (id < 1)
