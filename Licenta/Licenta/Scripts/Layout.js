@@ -77,6 +77,7 @@
     });
 
     elements.deleteDialogTrue.click(function () {
+        console.log(elements.innerDialog.data("foo"));
         window.location.href = "Delete/" + elements.innerDialog.data("foo");
         elements.deleteDialog.hide();
     });

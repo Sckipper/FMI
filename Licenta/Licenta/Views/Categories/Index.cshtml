@@ -46,15 +46,17 @@
                         @foreach (var item in Model)
                         {
                             <tr class="addedrow">
-                                <td id="id">@item.ID/td>
+                                <td id="id">@item.ID</td>
                                 <td>@item.CategoryName</td>
                                 <td id="nume">@item.Nume</td>
                                 <td>@item.Cod</td>
                                 <td>@item.Descriere</td>
-                                <td class="image">@if(item.Imagine != null)
-                                {
-                                    <img class="img" src="~/Content/ProductsImages/@(item.Imagine).png" />
-                                }</td>
+                                <td class="image">
+                                    @if(item.Imagine != null)
+                                    {
+                                        <img class="img" src="~/Content/ProductsImages/@(item.Imagine).png" />
+                                    }
+                                </td>
                                 <td>
                                     <button class="edit" onclick="location.href='@Url.Action("Edit", "Categories", new { id = item.ID})'"></button>
                                     <button class="delete"></button>
