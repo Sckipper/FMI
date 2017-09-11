@@ -28,6 +28,9 @@ namespace Licenta
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/codePicker").Include(
+                        "~/Scripts/CodePicker*"));
+
             bundles.Add(new ScriptBundle("~/bundles/Home").Include(
                         "~/Scripts/3rdParty/d3.min.js",
                       "~/Scripts/3rdParty/jquery.ntkPieChart.js",

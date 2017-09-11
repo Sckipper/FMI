@@ -233,6 +233,7 @@
     <Content Include="Content\Images\hovercheck.png" />
     <Content Include="Content\Images\Logo1.png" />
     <Content Include="Content\Images\LogOut.png" />
+    <Content Include="Content\Images\ShopSplit.png" />
     <Content Include="Content\Layout.css" />
     <Content Include="Content\Login.css" />
     <Content Include="favicon.ico" />
