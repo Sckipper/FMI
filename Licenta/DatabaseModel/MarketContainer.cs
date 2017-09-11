@@ -22,6 +22,21 @@ namespace DatabaseModel
             }).ToList();
         }
 
+        public static List<string> getTopMarketsCities(int top)
+        {
+            return new ShopAppEntities().Magazin.GroupBy(el => el.Oras).Select(grp => grp.Key).Take(top).ToList();
+        }
+
+        public static int getNrOfMarketsByCity(string city)
+        {
+            return new ShopAppEntities().Magazin.Where(el => el.Oras.Equals(city)).Count();
+        }
+
+        public static int getNrOfMarkets()
+        {
+            return new ShopAppEntities().Magazin.Count();
+        }
+
         public static Market getMarketById(int id)
         {
             using (var db = new ShopAppEntities())

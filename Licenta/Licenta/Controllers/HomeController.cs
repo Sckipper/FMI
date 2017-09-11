@@ -89,8 +89,54 @@ namespace Licenta.Controllers
                     var products7 = ProductsContainer.getNrOfProductsExpiredDays(7);
                     var products30 = ProductsContainer.getNrOfProductsExpiredDays(30);
                     model.chart2 = "" + products3 + "," + products7 + "," + products30;
-
                     break;
+
+                case 2:
+                    var pendingDeliveries2 = DeliveryContainer.getNrOfPendingDeliveries();
+                    var initiatedDeliveries2 = DeliveryContainer.getNrOfInitiatedDeliveries();
+                    var deliveredDeliveries2 = DeliveryContainer.getNrOfDeliveredDeliveries();
+                    var refusedDeliveries2 = DeliveryContainer.getNrOfRefusedDeliveries();
+                    model.dashboardMessage1 = "Aveti " + deliveredDeliveries2 + (deliveredDeliveries2 > 1 ? " livrari" : " livrare") + " efectuate";
+                    model.chart = "" + initiatedDeliveries2 + "," + pendingDeliveries2 + "," + deliveredDeliveries2 + "," + refusedDeliveries2;
+
+                    var nrEmployees = EmployeeContainer.getNrOfEmployees();
+                    var nrManagers = EmployeeContainer.getNrOfEmployees();
+                    var nrBosses = EmployeeContainer.getNrOfBosses();
+                    var nrSuppliers = EmployeeContainer.getNrOfEmployees();
+                    model.dashboardMessage2 = "Sunteţi manager pentru " + nrEmployees + (nrEmployees > 1 ? " angajaţi" : " angajat");
+                    model.chart2 = "" + nrEmployees + "," + nrManagers + "," + nrBosses + "," + nrSuppliers;
+                    break;
+
+                case 3:
+                    var suppliers = SupplierContainer.getNrOfSuppliers();
+                    var cities = SupplierContainer.getTopSuppliersCities(5);
+                    model.chart = "";
+                    model.cities = "";
+                    foreach (var city in cities)
+                    {
+                        model.cities += city + ',';
+                        model.chart  += SupplierContainer.getNrOfSupplierByCity(city).ToString() + ",";  
+                    }
+                    model.cities = model.cities.Substring(0, model.cities.Length - 1);
+                    model.chart  = model.chart.Substring(0, model.chart.Length - 1);
+
+                    model.dashboardMessage1 = "Aveti " + suppliers + (suppliers > 1 ? " furnizori" : " furnizor");
+
+                    var markets = MarketContainer.getNrOfMarkets();
+                    var marketsCities = MarketContainer.getTopMarketsCities(5);
+                    model.chart2 = "";
+                    model.cities2 = "";
+                    foreach (var city in marketsCities)
+                    {
+                        model.cities2 += city + ',';
+                        model.chart2 += MarketContainer.getNrOfMarketsByCity(city).ToString() + ",";
+                    }
+                    model.cities2 = model.cities2.Substring(0, model.cities2.Length - 1);
+                    model.chart2 = model.chart2.Substring(0, model.chart2.Length - 1);
+
+                    model.dashboardMessage2 = "Aveti " + markets + (markets > 1 ? " magazine" : " magazin");
+                    break;
+
             }
 
             return View(model);

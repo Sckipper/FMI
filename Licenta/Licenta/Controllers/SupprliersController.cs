@@ -2,6 +2,7 @@
 using DatabaseModel;
 using System.Net;
 using Licenta.Models;
+using System.Collections.Generic;
 
 namespace Licenta.Controllers
 {

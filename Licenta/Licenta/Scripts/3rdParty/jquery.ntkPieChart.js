@@ -165,7 +165,7 @@
     var rows = "";
     var left = $(elem).width() + $(elem).offset().left + 100;
     for (var i = 0; i < options.data.length; i++)
-        rows += '<tr><td style = \'background-color: ' + options.data[i].color + '\'></td><td>' + options.data[i].value + '</td><td>' + options.data[i].label + '</td></tr>';
+        rows += '<tr><td style = \'background-color: ' + options.data[i].color + '; width:10px \'></td><td>' + options.data[i].value + '</td><td>' + options.data[i].label + '</td></tr>';
     $(elem).append('<table class=\'chartHistory\' style=\'left: '+ left +'px;\'>' + rows + '</table>');
   };
 

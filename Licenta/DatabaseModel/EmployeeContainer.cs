@@ -26,6 +26,26 @@ namespace DatabaseModel
             }).ToList();
         }
 
+        public static int getNrOfEmployees()
+        {
+            return new ShopAppEntities().Angajat.Where(el => el.Functie.Equals("Angajat")).Count();
+        }
+
+        public static int getNrOfManagers()
+        {
+            return new ShopAppEntities().Angajat.Where(el => el.Functie.Equals("Manager magazin")).Count();
+        }
+
+        public static int getNrOfBosses()
+        {
+            return new ShopAppEntities().Angajat.Where(el => el.Functie.Equals("Sef magazin")).Count();
+        }
+
+        public static int getNrOfSuppliers()
+        {
+            return new ShopAppEntities().Angajat.Where(el => el.Functie.Equals("Furnizor")).Count();
+        }
+
         public static Employee getEmployeeById(int id)
         {
             using (var db = new ShopAppEntities())

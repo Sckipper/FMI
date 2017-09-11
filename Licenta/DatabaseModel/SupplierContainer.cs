@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DatabaseModel
 {
@@ -19,6 +17,21 @@ namespace DatabaseModel
                 Telefon = (long)el.Telefon
 
             }).ToList();
+        }
+
+        public static List<string> getTopSuppliersCities(int top)
+        {
+            return new ShopAppEntities().Furnizor.GroupBy(el => el.Oras).Select(grp => grp.Key).Take(top).ToList();
+        }
+
+        public static int getNrOfSupplierByCity(string city)
+        {
+            return new ShopAppEntities().Furnizor.Where(el => el.Oras.Equals(city)).Count();
+        }
+
+        public static int getNrOfSuppliers()
+        {
+            return new ShopAppEntities().Furnizor.Count();
         }
 
         public static Supplier getSupplierById(int id)

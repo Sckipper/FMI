@@ -256,7 +256,6 @@
     <None Include="Scripts\3rdParty\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\3rdParty\jquery-ui.1.12.1.js" />
     <Content Include="Scripts\3rdParty\jquery.ntkPieChart.js" />
-    <Content Include="Scripts\3rdParty\jquery.piegraph.js" />
     <Content Include="Scripts\3rdParty\jquery.validate.js" />
     <Content Include="Scripts\3rdParty\jquery.validate.min.js" />
     <Content Include="Scripts\3rdParty\jquery.validate.unobtrusive.js" />
