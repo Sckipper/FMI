@@ -121,7 +121,7 @@ namespace Licenta.Controllers
 
             switch (SessionAccessor.getUserRole())
             {
-                case 0:
+                case 0:  // Funizor
                     var pendingDeliveries = DeliveryContainer.getNrOfPendingDeliveries();
                     model.dashboardMessage1 = "Aveti de făcut " + pendingDeliveries + (pendingDeliveries>1?" livrari":" livrare");
                     var initiatedDeliveries = DeliveryContainer.getNrOfInitiatedDeliveries();
@@ -130,7 +130,7 @@ namespace Licenta.Controllers
                     model.chart = "" + initiatedDeliveries +","+ pendingDeliveries + "," + deliveredDeliveries + "," + refusedDeliveries;
                     break;
 
-                case 1:
+                case 1:  // Angajat
                     var totalCategories = CategoryContainer.getNrOfCategories();
                     model.dashboardMessage1 = "Gestionaţi " + totalCategories + (totalCategories > 1 ? " categorii" : " categorie");
                     var primaryCategories = CategoryContainer.getNrOfPrimaryCategories();
@@ -138,13 +138,15 @@ namespace Licenta.Controllers
 
                     var totalProducts = ProductsContainer.getNrOfProducts();
                     model.dashboardMessage2 = "Gestionaţi " + totalProducts + (totalProducts > 1 ? " produse" : " produs");
+
                     var products3 = ProductsContainer.getNrOfProductsExpiredDays(3);
                     var products7 = ProductsContainer.getNrOfProductsExpiredDays(7);
                     var products30 = ProductsContainer.getNrOfProductsExpiredDays(30);
-                    model.chart2 = "" + products3 + "," + products7 + "," + products30;
+                    var products0 = ProductsContainer.getNrOfProductsExpired();
+                    model.chart2 = "" + products3 + "," + products7 + "," + products30 + "," + products0 ;
                     break;
 
-                case 2:
+                case 2:  // Manager
                     var pendingDeliveries2 = DeliveryContainer.getNrOfPendingDeliveries();
                     var initiatedDeliveries2 = DeliveryContainer.getNrOfInitiatedDeliveries();
                     var deliveredDeliveries2 = DeliveryContainer.getNrOfDeliveredDeliveries();
@@ -160,7 +162,7 @@ namespace Licenta.Controllers
                     model.chart2 = "" + nrEmployees + "," + nrManagers + "," + nrBosses + "," + nrSuppliers;
                     break;
 
-                case 3:
+                case 3:  // sef
                     var suppliers = SupplierContainer.getNrOfSuppliers();
                     var cities = SupplierContainer.getTopSuppliersCities(5);
                     model.chart = "";

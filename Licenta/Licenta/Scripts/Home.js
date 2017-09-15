@@ -55,7 +55,7 @@
             }
             elements.chart.ntkPieChart({ data: data });
 
-            var labels = new Array("produse ce expiră în 3 zile", "produse ce expiră într-o săptămână", "produse ce expiră într-o lună");
+            var labels = new Array("produse ce expiră în 3 zile", "produse ce expiră într-o săptămână", "produse ce expiră într-o lună", "produse expirate");
             var data = new Array();
             for (var i = 0; i < numbers2.length; i++) {
                 data.push({

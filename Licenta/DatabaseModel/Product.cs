@@ -22,7 +22,7 @@ namespace DatabaseModel
         public Nullable<double> Pret { get; set; }
         [Required(ErrorMessage = "Cantitate invalida")]
         public int Cantitate { get; set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/mm/yyyy}")]
         public Nullable<System.DateTime> DataExpirate { get; set; }
         public string Descriere { get; set; }
         public string Imagine { get; set; }
