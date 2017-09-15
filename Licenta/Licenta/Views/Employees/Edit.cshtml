@@ -110,7 +110,6 @@
         if ($("#date").val()) {
             dateParts = $("#date").val().split("/");
             var dateObject = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
-            console.log($("#date").val(), dateObject );
             $(".datepicker").datepicker("setDate", dateObject);
         }
     });
