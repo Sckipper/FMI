@@ -25,7 +25,7 @@ namespace DatabaseModel
                 DataExpirate = el.DataExpirate,
                 Descriere = el.Descriere,
                 Imagine = el.Imagine
-            }).ToList();
+            }).OrderBy(el => el.Denumire).ToList();
         }
 
         public static int getNrOfProductsExpiredDays(int nr)

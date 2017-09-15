@@ -6,13 +6,21 @@
     "$ref": ""
   },
   "items": [
-@foreach (var item in Model)
+@for (int i = 0; i < (@Model.Count - 1); i++)
 {
-@Html.Raw("{\"id\": " + @item.ID + "," +
-            "\"denumire\": \"" + @item.Nume + "\"," +
-            "\"cod\": \"" + @item.Cod + "\"," +
-            "\"descriere\": \"" + @item.Descriere + "\"," +
-            "\"imagine\": \"" + @item.Imagine + "\"},")
+@Html.Raw("{\"id\": " + Model[i].ID + "," +
+            (Model[i].CategorieID != null? "\"categorieid\": " + Model[i].CategorieID + "," : "") +
+            "\"denumire\": \"" + Model[i].Nume + "\"," +
+            "\"cod\": \"" + Model[i].Cod + "\"," +
+            "\"descriere\": \"" + Model[i].Descriere + "\"," +
+            "\"imagine\": \"" + Model[i].Imagine + "\"},")
 }
+@Html.Raw("{\"id\": " + Model[@Model.Count - 1].ID + "," +
+            (Model[@Model.Count - 1].CategorieID != null ? "\"categorieid\": " + Model[@Model.Count - 1].CategorieID + "," : "") +
+            "\"denumire\": \"" + Model[@Model.Count - 1].Nume + "\"," +
+            "\"cod\": \"" + Model[@Model.Count - 1].Cod + "\"," +
+            "\"descriere\": \"" + Model[@Model.Count - 1].Descriere + "\"," +
+            "\"imagine\": \"" + Model[@Model.Count - 1].Imagine + "\"}")
   ]
 }
+

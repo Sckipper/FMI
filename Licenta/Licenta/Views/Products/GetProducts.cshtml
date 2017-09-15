@@ -6,17 +6,26 @@
     "$ref": ""
   },
   "items": [
-@foreach (var item in Model)
+@for (int i = 0; i < (@Model.Count - 1); i++)
 {
-    @Html.Raw("{\"id\": " + @item.ID + "," +
-            "\"categorieid\": \"" + @item.CategorieID + "\"," +
-            "\"denumire\": \"" + @item.Denumire + "\"," +
-            "\"greutate\": \"" + @item.Greutate + "\"," +
-            "\"pret\": " + @item.Pret + "," +
-            "\"cantitate\": " + @item.Cantitate + "," +
-            "\"dataexpirare\": \"" + @item.DataExpirate + "\"," +
-            "\"descriere\": \"" + @item.Descriere + "\"," +
-            "\"imagine\": \"" + @item.Imagine + "\"},")
+    @Html.Raw("{\"id\": " + Model[i].ID + "," +
+            "\"categorieid\": \"" + Model[i].CategorieID + "\"," +
+            "\"denumire\": \"" + Model[i].Denumire + "\"," +
+            "\"greutate\": \"" + Model[i].Greutate + "\"," +
+            "\"pret\": " + Model[i].Pret + "," +
+            "\"cantitate\": " + Model[i].Cantitate + "," +
+            "\"dataexpirare\": \"" + Model[i].DataExpirate + "\"," +
+            "\"descriere\": \"" + Model[i].Descriere + "\"," +
+            "\"imagine\": \"" + Model[i].Imagine + "\"},")
 }
+    @Html.Raw("{\"id\": " + Model[@Model.Count-1].ID + "," +
+            "\"categorieid\": \"" + Model[@Model.Count - 1].CategorieID + "\"," +
+            "\"denumire\": \"" + Model[@Model.Count - 1].Denumire + "\"," +
+            "\"greutate\": \"" + Model[@Model.Count - 1].Greutate + "\"," +
+            "\"pret\": " + Model[@Model.Count - 1].Pret + "," +
+            "\"cantitate\": " + Model[@Model.Count - 1].Cantitate + "," +
+            "\"dataexpirare\": \"" + Model[@Model.Count - 1].DataExpirate + "\"," +
+            "\"descriere\": \"" + Model[@Model.Count - 1].Descriere + "\"," +
+            "\"imagine\": \"" + Model[@Model.Count - 1].Imagine + "\"}")
     ]
 }

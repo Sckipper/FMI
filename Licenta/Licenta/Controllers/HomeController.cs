@@ -5,6 +5,9 @@ using Licenta.Models;
 using System.Web.Security;
 using DatabaseModel;
 using System.Collections.Generic;
+using System.Net.Mail;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Licenta.Controllers
 {
@@ -58,7 +61,57 @@ namespace Licenta.Controllers
             }
             return View(logmodel);
         }
-      
+
+        [AllowAnonymous]
+        public ActionResult PasswordRecovery()
+        {
+            var model = new LoginModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public ActionResult PasswordRecovery(LoginModel logmodel)
+        {
+            try
+            {
+                if (!String.IsNullOrWhiteSpace(logmodel.Email))
+                {
+                    var body = "<p>{1}{2}</p>";
+                    var message = new MailMessage();
+                    var password = EmployeeContainer.getPasswordByEmail(logmodel.Email);
+                    if (String.IsNullOrWhiteSpace(password))
+                    {
+                        logmodel.Message = "Email-ul nu exista";
+                        return View(logmodel);
+                    }
+                    message.To.Add(new MailAddress("gsckipper@gmail.com"));
+                    message.From = new MailAddress("radutdaniel96@gmail.com");
+                    message.Subject = "No-reply password recovery";
+                    message.Body = string.Format(body, "Parola dumneavoastra este: ");
+                    message.IsBodyHtml = true;
+
+                    using (var smtp = new SmtpClient())
+                    {
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = new NetworkCredential("radutdaniel96@gmail.com", "metaliza12"); ;
+                        smtp.Host = "smtp.gmail.com";
+                        smtp.Port = 25;
+                        smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        smtp.EnableSsl = true;
+                        smtp.Send(message);
+                        return RedirectToAction("Login");
+                    }
+                }
+            }catch(Exception ex)
+            {
+                logmodel.Message = "Nu s-a putut trimite mail-ul";
+            }
+            
+            return View(logmodel);
+        }
+
         public ActionResult Home()
         {
             if (SessionAccessor.LoggedUser == null)

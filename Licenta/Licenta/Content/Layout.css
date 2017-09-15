@@ -242,3 +242,7 @@ textarea {
 textarea{
     width: 100%;
 }
+
+#deleteMesage{
+    text-align: center;
+}

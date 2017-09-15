@@ -9,7 +9,7 @@ namespace DatabaseModel
     {
         public static List<Category> GetCategories()
         {
-            return new ShopAppEntities().Categorie.Select(el => new Category()
+            return new ShopAppEntities().Categorie.OrderBy(el => el.Nume).Select(el => new Category()
             {
                 ID = el.ID,
                 CategorieID = el.CategorieID,

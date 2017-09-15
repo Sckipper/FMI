@@ -26,6 +26,11 @@ namespace DatabaseModel
             }).ToList();
         }
 
+        public static string getPasswordByEmail(string email)
+        {
+            return new ShopAppEntities().Angajat.Where(el => el.Email.Equals(email)).Select(el => el.Parola).FirstOrDefault();
+        }
+
         public static int getNrOfEmployees()
         {
             return new ShopAppEntities().Angajat.Where(el => el.Functie.Equals("Angajat")).Count();
