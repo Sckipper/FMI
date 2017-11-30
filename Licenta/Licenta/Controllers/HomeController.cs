@@ -78,7 +78,7 @@ namespace Licenta.Controllers
             {
                 if (!String.IsNullOrWhiteSpace(logmodel.Email))
                 {
-                    var body = "<p>{1}{2}</p>";
+                    var body = "<p>{0}{1}</p>";
                     var message = new MailMessage();
                     var password = EmployeeContainer.getPasswordByEmail(logmodel.Email);
                     if (String.IsNullOrWhiteSpace(password))
@@ -89,7 +89,7 @@ namespace Licenta.Controllers
                     message.To.Add(new MailAddress("gsckipper@gmail.com"));
                     message.From = new MailAddress("radutdaniel96@gmail.com");
                     message.Subject = "No-reply password recovery";
-                    message.Body = string.Format(body, "Parola dumneavoastra este: ");
+                    message.Body = string.Format(body, "Parola dumneavoastra este: ", password);
                     message.IsBodyHtml = true;
 
                     using (var smtp = new SmtpClient())
@@ -97,7 +97,7 @@ namespace Licenta.Controllers
                         smtp.UseDefaultCredentials = false;
                         smtp.Credentials = new NetworkCredential("radutdaniel96@gmail.com", "metaliza12"); ;
                         smtp.Host = "smtp.gmail.com";
-                        smtp.Port = 25;
+                        smtp.Port = 587;
                         smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                         smtp.EnableSsl = true;
                         smtp.Send(message);
