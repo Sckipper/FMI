@@ -88,10 +88,11 @@
             elements.chart.ntkPieChart({ data: data });
 
             var labels = new Array("angajaţi", "manageri", "şefi", "furnizori");
+            var sgLabels = new Array("angajat", "manager", "şef", "furnizor");
             var data = new Array();
             for (var i = 0; i < numbers2.length; i++) {
                 data.push({
-                    'label': labels[i],
+                    'label': parseInt(numbers2[i]) == 1 ? sgLabels[i] : labels[i],
                     'value': numbers2[i],
                     'color': colors[i]
                 })

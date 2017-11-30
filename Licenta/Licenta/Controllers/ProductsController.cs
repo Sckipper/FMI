@@ -78,7 +78,7 @@ namespace Licenta.Controllers
                     postedFile.SaveAs(path);
                     model.Product.Imagine = "img_" + model.Product.Denumire.ToLower();
                 }
-
+                
                 ProductsContainer.SaveProduct(model.Product);
                 return RedirectToAction("Index");
             }

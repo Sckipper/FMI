@@ -10,13 +10,13 @@
 <script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
 <script>
-    $(document).ready(function (){
-        $('#datatable').dataTable( {
-            "columnDefs": [ {
+    $(document).ready(function () {
+        $('#datatable').dataTable({
+            "columnDefs": [{
                 "targets": 'no-sort',
                 "orderable": false,
-            } ]
-        } );
+            }]
+        });
     });
 </script>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -58,7 +58,10 @@
                                 <td>@item.Pret</td>
                                 <td>
                                     <button class="edit" onclick="location.href='@Url.Action("Edit", "Deliveries", new { id = item.ID})'"></button>
-                                    <button class="delete"></button>
+                                    @if (Session["role"] != null && !Session["role"].ToString().Equals("0"))
+                                    {
+                                        <button class="delete"></button>
+                                    }
                                 </td>
                             </tr>
                         }
@@ -72,7 +75,7 @@
 
 <script>
     $('.status').each(function () {
-        switch ($(this).text()){
+        switch ($(this).text()) {
             case "Initiata":
                 $(this).css('color', 'orange');
                 break;
