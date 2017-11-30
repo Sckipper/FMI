@@ -74,8 +74,11 @@ namespace Licenta.Controllers
                     category.Imagine = "img_" + category.Nume.ToLower();
                 }
 
-                CategoryContainer.SaveCategory(category);
-                return RedirectToAction("Index");
+                if (CategoryContainer.ValidateCode(category.Cod))
+                {
+                    CategoryContainer.SaveCategory(category);
+                    return RedirectToAction("Index");
+                }
             }
             var model = new CategoryModel();
             model.Category = category;
@@ -86,23 +89,26 @@ namespace Licenta.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(HttpPostedFileBase postedFile, Category category)
+        public ActionResult Edit(HttpPostedFileBase postedFile, CategoryModel categoryModel)
         {
             if (ModelState.IsValid)
             {
                 if (postedFile != null)
                 {
-                    var filename = "img_" + category.Nume.ToLower() + ".png";
+                    var filename = "img_" + categoryModel.Category.Nume.ToLower() + ".png";
                     var path = Path.Combine(Server.MapPath("~/Content/ProductsImages/"), filename);
                     postedFile.SaveAs(path);
-                    category.Imagine = "img_" + category.Nume.ToLower();
+                    categoryModel.Category.Imagine = "img_" + categoryModel.Category.Nume.ToLower();
                 }
 
-                CategoryContainer.SaveCategory(category);
-                return RedirectToAction("Index");
+                if (CategoryContainer.ValidateCode(categoryModel.Category.Cod))
+                {
+                    CategoryContainer.SaveCategory(categoryModel.Category);
+                    return RedirectToAction("Index");
+                }
             }
-
-            return View(category);
+            categoryModel.Categories = CategoryContainer.GetSupperiorCategories();
+            return View(categoryModel);
         }
 
 
@@ -114,7 +120,7 @@ namespace Licenta.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             var model = new CategoryModel();
-            model.Categories = CategoryContainer.GetCategories();
+            model.Categories = CategoryContainer.GetSupperiorCategories();
             model.Category = CategoryContainer.getCategoryById((int)id);
 
             return View(model);

@@ -5,6 +5,7 @@
         canvas: $("#canvas"),
         canvas2: $("#canvas2"),
         codePicker: $("#codepicker"),
+        categoryId: $("#Category_CategorieID"),
     };
 
     var Rayons = [];
@@ -317,7 +318,7 @@
                 for (var j = 0; j < Rayons[i].rafturi.length; j++) {
                     if (pointX > Rayons[i].rafturi[j].startX && pointX < Rayons[i].rafturi[j].endX && pointY > Rayons[i].rafturi[j].startY && pointY < Rayons[i].rafturi[j].endY) {
                         var code = null;
-                        if ($("#Category_CategorieID").val() != "")
+                        if (elements.categoryId.val() != "")
                             code = Rayons[i].id + '-' + (j + 1) + '-' + Rayons[i].nrRafturi;
                         else
                             code = Rayons[i].id
@@ -349,5 +350,10 @@
     }
 
     initialize();
+
+    elements.categoryId.change(function () {
+        elements.codePicker.val("");
+    });
+
 }
 var codpicker = new CodePicker();

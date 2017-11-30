@@ -20,9 +20,44 @@ namespace DatabaseModel
             }).ToList();
         }
 
+        public static List<Category> GetSupperiorCategories()
+        {
+            return new ShopAppEntities().Categorie.OrderBy(el => el.Nume)
+                .Where(el => el.CategorieID == null)
+                .Select(el => new Category()
+                {
+                    ID = el.ID,
+                    CategorieID = el.CategorieID,
+                    Nume = el.Nume,
+                    Cod = el.Cod,
+                    Descriere = el.Descriere,
+                    Imagine = el.Imagine
+                }).ToList();
+        }
+
         public static int getNrOfCategories()
         {
             return new ShopAppEntities().Categorie.Count();
+        }
+
+        public static bool ValidateCode(string code)
+        {
+            int id = 0, id2 = -1, id3 = 0;
+            if (code.Contains("-"))
+            {
+                var ids = code.Split('-');
+                if(ids.Length == 3)
+                {
+                    Int32.TryParse(ids[0], out id);
+                    Int32.TryParse(ids[1], out id2);
+                    Int32.TryParse(ids[2], out id3);
+                }
+            }
+           
+            if (id != 0 && id2 <= id3)
+                return new ShopAppEntities().Categorie.Where(el => el.ID == id).Count() > 0;
+
+            return false;
         }
 
         public static int getNrOfPrimaryCategories()

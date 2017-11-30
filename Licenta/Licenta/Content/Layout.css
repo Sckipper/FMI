@@ -257,3 +257,8 @@ textarea{
     margin: auto;
 }
 
+#datatable .image img {
+    z-index: 100;
+    position: sticky;
+}
+
