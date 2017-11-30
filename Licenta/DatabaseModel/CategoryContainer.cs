@@ -51,7 +51,8 @@ namespace DatabaseModel
         {
             if (category == null)
                 throw new ArgumentNullException("Category");
-            try{
+            try
+            {
                 using (var db = new ShopAppEntities())
                 {
                     Categorie categ = db.Categorie.FirstOrDefault(el => el.ID == category.ID);
@@ -61,16 +62,21 @@ namespace DatabaseModel
                         db.Categorie.Add(categ);
                     }
 
-                    categ.CategorieID = category.CategorieID;
-                    categ.Nume = category.Nume;
-                    categ.Cod = category.Cod;
-                    categ.Descriere = category.Descriere;
-                    categ.Imagine = category.Imagine;
+                    if (db.Categorie.FirstOrDefault(el => el.ID == category.CategorieID) != null)
+                    {
+                        categ.CategorieID = category.CategorieID;
+                        categ.Nume = category.Nume;
+                        categ.Cod = category.Cod;
+                        categ.Descriere = category.Descriere;
+                        categ.Imagine = category.Imagine;
 
-                    db.SaveChanges();
+                        db.SaveChanges();
+                    }
+
                 }
             }
-            catch(Exception ex){
+            catch (Exception ex)
+            {
 
             }
         }

@@ -95,7 +95,7 @@ namespace Licenta.Controllers
                     using (var smtp = new SmtpClient())
                     {
                         smtp.UseDefaultCredentials = false;
-                        smtp.Credentials = new NetworkCredential("radutdaniel96@gmail.com", "metaliza12"); ;
+                        smtp.Credentials = new NetworkCredential("poiectssc@gmail.com", "123qwe!@#"); ;
                         smtp.Host = "smtp.gmail.com";
                         smtp.Port = 587;
                         smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
